@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>日本語を学習する — Unication</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1E3A6E; --blue:#2B5BA8; --blue-mid:#3A6FC5; --blue-light:#5B8DD9;
+  --blue-pale:#D6E4F7; --blue-bg:#EEF4FC;
+  --white:#fff; --off-white:#F5F8FE;
+  --text-dark:#1a2a4a; --text-mid:#3a5080; --text-light:#7a9ac0;
+  --yellow:#F5C842; --green:#2e7d52; --green-light:#e8f5e9; --green-pale:#a5d6b5;
+  --accent1:#6ecfa0; --accent2:#f5c842;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP','DM Sans',sans-serif;background:#f0f4ff;color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;overflow-x:clip;}
+
+/* ===== NAV ===== */
+.lang-bar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--blue-pale);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;box-shadow:0 2px 20px rgba(30,58,110,0.06);}
+.logo-nav{font-family:'Comfortaa',cursive;font-weight:700;font-size:1.4rem;text-decoration:none;}
+.logo-nav .uni{background:linear-gradient(90deg,#6ecfa0,#f5c842);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo-nav .cation{color:var(--navy);-webkit-text-fill-color:var(--navy);}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.back-btn{color:var(--text-mid);font-size:0.85rem;text-decoration:none;font-weight:500;transition:color 0.2s;}
+.back-btn:hover{color:var(--navy);}
+.lang-toggle{display:flex;gap:4px;background:var(--blue-bg);border-radius:20px;padding:3px;}
+.lang-btn{border:none;cursor:pointer;border-radius:16px;padding:5px 14px;font-size:0.8rem;font-weight:600;transition:all 0.2s;background:transparent;color:var(--text-mid);}
+.lang-btn.active{background:var(--navy);color:white;}
+
+/* ===== HERO ===== */
+.hero{padding:100px 40px 56px;background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 100%);text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;}
+.blob-1{width:500px;height:500px;background:radial-gradient(circle,rgba(110,207,160,0.2) 0%,transparent 70%);top:-150px;right:-100px;animation:blobA 10s ease-in-out infinite;}
+.blob-2{width:380px;height:380px;background:radial-gradient(circle,rgba(245,200,66,0.15) 0%,transparent 70%);bottom:-100px;left:-80px;animation:blobB 8s ease-in-out infinite;}
+.blob-3{width:280px;height:280px;background:radial-gradient(circle,rgba(91,141,217,0.2) 0%,transparent 70%);top:40%;left:40%;animation:blobA 12s ease-in-out infinite reverse;}
+@keyframes blobA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-24px,18px) scale(1.06)}}
+@keyframes blobB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(18px,-22px) scale(1.09)}}
+.hero-badge{display:inline-block;background:rgba(110,207,160,0.2);color:#6ecfa0;border:1px solid rgba(110,207,160,0.4);font-size:0.72rem;font-weight:800;padding:5px 16px;border-radius:20px;margin-bottom:20px;letter-spacing:0.1em;text-transform:uppercase;animation:fadeInUp 0.7s ease both;position:relative;z-index:1;}
+.hero-title{font-family:'Playfair Display','Noto Sans JP',serif;font-size:clamp(2rem,5vw,3.4rem);color:white;line-height:1.2;margin-bottom:12px;animation:fadeInUp 0.7s 0.1s ease both;position:relative;z-index:1;}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,0.75);line-height:1.9;font-weight:300;max-width:520px;margin:0 auto 32px;animation:fadeInUp 0.7s 0.2s ease both;position:relative;z-index:1;}
+/* floating dots */
+.hero-dots{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.fdot{position:absolute;border-radius:50%;background:rgba(255,255,255,0.08);animation:dotRise linear infinite;}
+@keyframes dotRise{0%{opacity:0;transform:translateY(0) scale(0.5)}10%{opacity:1}90%{opacity:0.6}100%{opacity:0;transform:translateY(-160px) scale(1.2)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== MAIN PANEL (統一) ===== */
+/* 使い方＋練習ツールを同一パネルで包む */
+.practice-panel{max-width:960px;margin:0 auto;padding:40px 40px 0;}
+
+@media(max-width:640px){
+  .practice-panel{padding:28px 16px 0;}
+}
+
+/* ===== UNIFIED CARD ===== */
+.unified-card{background:white;border-radius:32px;overflow:visible;box-shadow:0 12px 60px rgba(30,58,110,0.12);margin-top:0;position:relative;z-index:10;}
+
+/* section header inside unified card */
+.uc-section{padding:0;}
+.uc-section-header{background:linear-gradient(135deg,var(--navy) 0%,var(--blue-mid) 100%);padding:28px 40px 20px;display:flex;align-items:center;gap:16px;}
+.uc-section-icon{width:52px;height:52px;background:rgba(255,255,255,0.15);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+.uc-section-label{font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:4px;}
+.uc-section-title{font-family:'Playfair Display','Noto Sans JP',serif;font-size:1.4rem;color:white;line-height:1.3;}
+.uc-section-body{padding:32px 40px;}
+
+/* ===== HOW TO USE STEPS ===== */
+.howto-steps{display:flex;flex-direction:column;gap:0;position:relative;}
+/* vertical line drawn by JS */
+.howto-step{display:grid;grid-template-columns:42px 1fr;gap:0 18px;padding-bottom:36px;opacity:0;transform:translateX(-14px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.howto-step:last-child{padding-bottom:0;}
+.howto-step.visible{opacity:1;transform:translateX(0);}
+.howto-num{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--blue-mid),var(--navy));color:white;font-size:0.9rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:1;box-shadow:0 0 0 4px white,0 0 0 6px var(--blue-pale);margin-top:0;align-self:start;}
+.howto-body{background:var(--off-white);border:1px solid var(--blue-pale);border-radius:18px;padding:16px 20px;flex:1;transition:background 0.3s,border-color 0.3s,transform 0.3s;cursor:default;}
+.howto-step:hover .howto-body{background:var(--blue-bg);border-color:var(--blue-light);transform:translateX(4px);}
+.howto-step-title{font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.howto-step-desc{font-size:0.83rem;color:var(--text-mid);line-height:1.8;font-weight:300;}
+.step-badge{display:inline-block;background:linear-gradient(135deg,var(--yellow),#e8a000);color:#5a3e00;font-size:0.62rem;font-weight:800;padding:2px 10px;border-radius:10px;letter-spacing:0.06em;}
+.howto-step-btn{display:inline-block;margin-top:10px;background:var(--navy);color:white;border:none;border-radius:18px;padding:8px 20px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.22s;text-decoration:none;box-shadow:0 4px 14px rgba(30,58,110,0.2);}
+.howto-step-btn:hover{background:var(--blue);transform:translateY(-2px);box-shadow:0 6px 20px rgba(30,58,110,0.28);}
+
+/* 50音表 */
+.gojuon-toggle-btn{display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:white;color:var(--navy);border:2px solid var(--blue-pale);border-radius:18px;padding:7px 18px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.22s;}
+.gojuon-toggle-btn:hover{background:var(--blue-bg);border-color:var(--blue-mid);}
+.gojuon-wrap{display:none;margin-top:14px;overflow-x:auto;overflow-y:visible;-webkit-overflow-scrolling:touch;border-radius:14px;border:2px solid var(--blue-pale);max-width:100%;}
+.gojuon-wrap.open{display:block;animation:fadeInUp 0.3s ease both;}
+.gojuon-table{border-collapse:collapse;font-size:0.8rem;width:auto;min-width:600px;}
+.gojuon-table thead th{background:var(--navy);color:white;padding:9px 8px;text-align:center;font-weight:700;font-size:0.72rem;white-space:nowrap;}
+.gojuon-table tbody td{background:white;color:var(--text-dark);padding:8px 6px;text-align:center;border:1px solid var(--blue-pale);}
+.gojuon-table tbody tr:nth-child(even) td{background:var(--off-white);}
+.gojuon-table tbody td:hover{background:var(--blue-bg);}
+.kana{font-size:1.05rem;display:block;color:var(--navy);font-weight:700;}
+.roma{font-size:0.68rem;display:block;color:var(--blue-mid);font-weight:600;margin-top:1px;}
+.gojuon-table td.empty{background:#f8f8fc;}
+
+/* デバイスガイド */
+.device-btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.device-tab{background:white;color:var(--text-mid);border:2px solid var(--blue-pale);border-radius:16px;padding:6px 16px;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+.device-tab.active{background:var(--navy);color:white;border-color:var(--navy);}
+.device-panel{display:none;margin-top:12px;}
+.device-panel.active{display:block;animation:fadeInUp 0.3s ease both;}
+.device-steps{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.device-steps li{display:flex;gap:10px;align-items:flex-start;font-size:0.83rem;color:var(--text-mid);line-height:1.75;}
+.ds-num{background:var(--navy);color:white;font-size:0.68rem;font-weight:800;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+
+/* ===== DIVIDER inside unified card ===== */
+.uc-divider{height:3px;background:linear-gradient(90deg,var(--blue-pale),transparent);margin:0 40px;}
+
+/* ===== PRACTICE BOX (枠＋関連バナー) ===== */
+.practice-connection{
+  margin:32px 40px 0;
+  display:flex;align-items:center;gap:12px;
+  padding:14px 20px;
+  background:linear-gradient(135deg,rgba(46,125,82,0.08),rgba(43,91,168,0.08));
+  border:1.5px dashed var(--green-pale);
+  border-bottom:none;
+  border-radius:20px 20px 0 0;
+}
+.practice-connection-text{font-size:0.8rem;color:var(--green);font-weight:700;}
+.practice-connection-sub{font-size:0.75rem;color:var(--text-mid);font-weight:300;margin-top:2px;}
+
+.practice-box{
+  margin:0 40px 40px;
+  border:2px solid transparent;
+  background-clip:padding-box;
+  position:relative;
+  border-radius:0 0 24px 24px;
+  background:white;
+  overflow:hidden;
+  box-shadow:0 8px 32px rgba(30,58,110,0.1);
+}
+.practice-box::before{
+  content:'';
+  position:absolute;inset:0;
+  border-radius:0 0 22px 22px;
+  padding:2px;
+  background:linear-gradient(135deg,#6ecfa0,var(--blue-mid));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+
+/* ===== KEYBOARD SECTION ===== */
+.kb-section-body{padding:32px 40px;}
+
+/* mode row */
+.mode-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:18px;}
+.mode-label{font-size:0.8rem;font-weight:700;color:var(--text-mid);}
+.mode-btn{padding:7px 18px;border-radius:20px;border:2px solid var(--blue-pale);background:white;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;color:var(--text-mid);transition:all 0.2s;box-shadow:0 2px 8px rgba(30,58,110,0.06);}
+.mode-btn.active{background:var(--navy);color:white;border-color:var(--navy);box-shadow:0 4px 14px rgba(30,58,110,0.22);}
+
+/* display */
+.kb-display{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:20px;padding:20px 22px;margin-bottom:14px;min-height:108px;position:relative;box-shadow:0 8px 32px rgba(30,58,110,0.18);}
+.kb-display-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.kb-display-label{font-size:0.68rem;font-weight:800;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.5);}
+.kb-btn-row{display:flex;gap:7px;}
+.kb-clear{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:5px 13px;font-size:0.73rem;font-weight:700;color:white;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+.kb-clear:hover{background:rgba(255,255,255,0.22);}
+.kb-romaji{font-size:0.82rem;color:rgba(255,255,255,0.5);min-height:18px;letter-spacing:0.04em;margin-bottom:4px;}
+.kb-kana{font-size:2rem;color:white;font-weight:700;min-height:48px;line-height:1.3;word-break:break-all;}
+.kb-cursor{display:inline-block;width:2px;height:1.8rem;background:var(--accent1);margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* hint */
+.hint-bar{background:var(--blue-bg);border-radius:14px;padding:10px 16px;font-size:0.8rem;color:var(--text-mid);line-height:1.75;display:flex;gap:8px;margin-bottom:16px;border:1px solid var(--blue-pale);}
+
+/* keyboard */
+.keyboard-wrap{display:flex;flex-direction:column;gap:7px;margin-bottom:18px;}
+.kb-row{display:flex;gap:5px;justify-content:center;}
+.key{flex:1;max-width:62px;min-width:24px;background:white;border:1.5px solid var(--blue-pale);border-radius:12px;height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;box-shadow:0 3px 0 var(--blue-pale),0 4px 12px rgba(30,58,110,0.08);transition:all 0.1s;user-select:none;padding:0;}
+.key:active,.key.pressed{transform:translateY(3px);box-shadow:0 0px 0 var(--blue-pale),0 1px 4px rgba(30,58,110,0.06);background:var(--blue-bg);}
+.key-main{font-size:1rem;font-weight:800;color:var(--text-dark);line-height:1;}
+.key.special{background:var(--off-white);flex:1.6;max-width:84px;border-color:var(--blue-pale);}
+.key.special .key-main{font-size:0.68rem;color:var(--text-mid);font-weight:700;}
+.key.space-key{flex:4;max-width:230px;}
+.key.enter-key{background:var(--navy);border-color:var(--navy);box-shadow:0 3px 0 #0e2040,0 4px 12px rgba(30,58,110,0.25);}
+.key.enter-key .key-main{color:white;font-size:0.68rem;}
+.key.enter-key:active{box-shadow:0 0 0 #0e2040;}
+.key.delete-key{background:#fff5f5;border-color:#ffd0d0;box-shadow:0 3px 0 #ffd0d0,0 4px 12px rgba(192,57,43,0.08);}
+.key.delete-key .key-main{color:#c0392b;font-size:0.68rem;}
+
+/* download */
+.btn-dl-wrap{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-dl{flex:1;min-width:200px;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--navy),var(--blue-mid));color:white;border:none;border-radius:18px;padding:14px 24px;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.25s;box-shadow:0 6px 24px rgba(30,58,110,0.22);}
+.btn-dl:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(30,58,110,0.3);}
+
+/* ===== OTHER CARDS ===== */
+.other-cards{max-width:960px;margin:32px auto 80px;padding:0 40px;display:flex;flex-direction:column;gap:24px;}
+.course-card{background:white;border-radius:24px;border:2px solid var(--blue-pale);overflow:hidden;box-shadow:0 6px 32px rgba(30,58,110,0.07);opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease,box-shadow 0.3s;}
+.course-card.visible{opacity:1;transform:translateY(0);}
+.course-card:hover{box-shadow:0 14px 48px rgba(30,58,110,0.13);}
+.card-bar{height:5px;width:100%;}
+.free .card-bar{background:linear-gradient(90deg,#6ecfa0,#2e7d52);}
+.paid .card-bar{background:linear-gradient(90deg,#f5c842,#e8a000);}
+.card-body{padding:32px 36px;}
+.card-header{display:flex;align-items:flex-start;gap:18px;margin-bottom:18px;flex-wrap:wrap;}
+.card-icon-wrap{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;}
+.free .card-icon-wrap{background:var(--green-light);}
+.paid .card-icon-wrap{background:#fff8e1;}
+.card-tag{display:inline-block;font-size:0.63rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-radius:12px;margin-bottom:7px;}
+.free .card-tag{background:var(--green-light);color:var(--green);}
+.paid .card-tag{background:#fff3cd;color:#7a5c00;}
+.paid-ribbon{display:inline-flex;align-items:center;gap:5px;background:#e8c84a;color:#5a3e00;font-size:0.63rem;font-weight:800;padding:4px 12px;border-radius:12px;margin-left:8px;}
+.card-title{font-family:'Playfair Display','Noto Sans JP',serif;font-size:1.4rem;font-weight:700;line-height:1.3;}
+.free .card-title{color:var(--navy);}
+.paid .card-title{color:#5a3e00;}
+.card-desc{font-size:0.87rem;color:var(--text-mid);line-height:1.85;font-weight:300;margin-bottom:18px;}
+.paid .card-desc{color:#6b4f00;}
+.card-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:20px;}
+.card-features li{display:flex;gap:10px;align-items:flex-start;font-size:0.84rem;line-height:1.65;}
+.free .card-features li{color:var(--text-mid);}
+.paid .card-features li{color:#6b4f00;}
+.feat-check{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;flex-shrink:0;margin-top:1px;font-weight:700;}
+.free .feat-check{background:var(--green-light);color:var(--green);}
+.paid .feat-check{background:#fff3cd;color:#7a5c00;}
+.card-divider{border:none;border-top:1px solid var(--blue-pale);margin:18px 0;}
+.paid .card-divider{border-color:#f0d878;}
+.coming-box{background:var(--blue-bg);border-radius:14px;padding:13px 17px;display:flex;gap:10px;font-size:0.81rem;color:var(--text-mid);line-height:1.75;margin-bottom:18px;border:1px dashed var(--blue-pale);}
+.warn-box{background:#fffbea;border-radius:14px;padding:13px 17px;display:flex;gap:10px;font-size:0.81rem;color:#7a5c00;line-height:1.75;margin-bottom:18px;}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-chat,.btn-trial,.btn-enroll{display:inline-block;text-decoration:none;padding:12px 26px;border-radius:24px;font-size:0.9rem;font-weight:700;font-family:inherit;transition:all 0.25s;cursor:pointer;border:none;}
+.btn-chat{background:var(--navy);color:white;box-shadow:0 4px 16px rgba(30,58,110,0.22);}
+.btn-chat:hover{background:var(--blue);transform:translateY(-2px);}
+.btn-trial{background:white;color:var(--green);border:2px solid var(--green-pale);}
+.btn-trial:hover{background:var(--green-light);border-color:var(--green);transform:translateY(-2px);}
+.btn-enroll{background:var(--yellow);color:#5a3e00;box-shadow:0 4px 16px rgba(200,160,0,0.25);}
+.btn-enroll:hover{background:#e8b800;transform:translateY(-2px);}
+
+/* FOOTER */
+footer{background:#0d1d40;padding:36px 40px;text-align:center;color:rgba(255,255,255,0.38);font-size:0.8rem;}
+.foot-logo{font-family:'Comfortaa',cursive;font-size:1.3rem;font-weight:700;margin-bottom:8px;}
+.foot-logo .uni{background:linear-gradient(90deg,#6ecfa0,#f5c842);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.foot-logo .cation{color:white;-webkit-text-fill-color:white;}
+
+@media(max-width:640px){
+  .lang-bar{padding:0 16px;}
+  .hero{padding:88px 20px 48px;}
+  .practice-panel{padding:28px 16px 0;}
+  .other-cards{padding:0 16px;}
+  .practice-connection{margin:28px 16px 0;}
+  .practice-box{margin:0 16px 24px;}
+  .uc-section-header,.kb-section-body,.uc-section-body{padding:20px 18px;}
+  .uc-divider{margin:0 18px;}
+  .card-body{padding:22px 18px;}
+  .btn-row,.btn-dl-wrap{flex-direction:column;}
+  .key{height:46px;}
+  .kb-kana{font-size:1.6rem;}
+  footer{padding:28px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="lang-bar">
+  <a href="index.html" class="logo-nav"><span class="uni">Uni</span><span class="cation">cation</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="back-btn" data-ja="← ホームへ" data-en="← Home">← ホームへ</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="ja">JP</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-dots" id="heroDots"></div>
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="hero-blob blob-3"></div>
+  <div class="hero-badge" data-ja="日本語学習" data-en="Japanese Learning">日本語学習</div>
+  <h1 class="hero-title" data-ja="日本語を学習する" data-en="Learn Japanese">日本語を学習する</h1>
+  <p class="hero-sub" data-ja="練習ツール・会話練習・文法学習。目的に合わせて選べます。" data-en="Practice tool, conversation, grammar — choose what fits your goals.">練習ツール・会話練習・文法学習。目的に合わせて選べます。</p>
+</div>
+
+<!-- ===== UNIFIED CARD (使い方 + 練習ツール) ===== -->
+<div class="practice-panel">
+<div class="unified-card">
+
+  <!-- 使い方 セクション -->
+  <div class="uc-section">
+    <div class="uc-section-header">
+      <div class="uc-section-icon">📖</div>
+      <div>
+        <div class="uc-section-label" data-ja="使い方" data-en="How to Use">使い方</div>
+        <div class="uc-section-title" data-ja="日本語の無料練習ツール — 使い方" data-en="Free Japanese Practice Tool — How to Use">日本語の無料練習ツール — 使い方</div>
+      </div>
+    </div>
+    <div class="uc-section-body">
+      <div class="howto-steps">
+
+        <div class="howto-step">
+          <div class="howto-num">1</div>
+          <div class="howto-body">
+            <div class="howto-step-title" data-ja="入力したい言葉の日本語を調べる" data-en="Look up the Japanese for the word you want to type">入力したい言葉の日本語を調べる</div>
+            <p class="howto-step-desc" data-ja="翻訳アプリや辞書で、入力したい言葉のひらがなを調べましょう。例：「My name is 〇〇.」→「わたしのなまえは〇〇です」" data-en="Use a translation app or dictionary to find the hiragana for the word you want. e.g. 'My name is 〇〇.' → 'わたしのなまえは〇〇です'">翻訳アプリや辞書で、入力したい言葉のひらがなを調べましょう。例：「My name is 〇〇.」→「わたしのなまえは〇〇です」</p>
+          </div>
+        </div>
+
+        <div class="howto-step">
+          <div class="howto-num">2</div>
+          <div class="howto-body">
+            <div class="howto-step-title" data-ja="50音対応表を見ながら入力してみる" data-en="Type while referring to the 50-sound chart">50音対応表を見ながら入力してみる</div>
+            <p class="howto-step-desc" data-ja="ひらがなとアルファベットの対応表を参考にしながら、下のキーボードでローマ字入力してみましょう。" data-en="Refer to the chart below and type using romaji on the keyboard.">ひらがなとアルファベットの対応表を参考にしながら、下のキーボードでローマ字入力してみましょう。</p>
+            <button class="gojuon-toggle-btn" onclick="toggleGojuon(this)" data-ja="📋 50音対応表を表示する ▼" data-en="📋 Show Kana Chart ▼">📋 50音対応表を表示する ▼</button>
+            <div class="gojuon-wrap" id="gojuonWrap">
+              <!-- タブ切り替え -->
+              <div style="display:flex;gap:0;border-bottom:2px solid var(--blue-pale);background:white;">
+                <button class="gojuon-tab active" onclick="switchGojuon('basic',this)" style="flex:1;padding:10px;border:none;background:transparent;font-size:0.82rem;font-weight:700;color:var(--navy);cursor:pointer;border-bottom:3px solid var(--navy);margin-bottom:-2px;font-family:inherit;">あ〜ん（基本）</button>
+                <button class="gojuon-tab" onclick="switchGojuon('extra',this)" style="flex:1;padding:10px;border:none;background:transparent;font-size:0.82rem;font-weight:700;color:var(--text-light);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;font-family:inherit;">その他（濁音・拗音）</button>
+              </div>
+
+              <!-- ページ1: あ〜ん -->
+              <div id="gojuon-basic" style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+              <table class="gojuon-table">
+                <thead><tr>
+                  <th>あ行</th><th>か行</th><th>さ行</th><th>た行</th><th>な行</th>
+                  <th>は行</th><th>ま行</th><th>や行</th><th>ら行</th><th>わ行</th><th>ん</th>
+                </tr></thead>
+                <tbody>
+                  <tr>
+                    <td><span class="kana">あ</span><span class="roma">a</span></td>
+                    <td><span class="kana">か</span><span class="roma">ka</span></td>
+                    <td><span class="kana">さ</span><span class="roma">sa</span></td>
+                    <td><span class="kana">た</span><span class="roma">ta</span></td>
+                    <td><span class="kana">な</span><span class="roma">na</span></td>
+                    <td><span class="kana">は</span><span class="roma">ha</span></td>
+                    <td><span class="kana">ま</span><span class="roma">ma</span></td>
+                    <td><span class="kana">や</span><span class="roma">ya</span></td>
+                    <td><span class="kana">ら</span><span class="roma">ra</span></td>
+                    <td><span class="kana">わ</span><span class="roma">wa</span></td>
+                    <td rowspan="5"><span class="kana">ん</span><span class="roma">nn</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="kana">い</span><span class="roma">i</span></td>
+                    <td><span class="kana">き</span><span class="roma">ki</span></td>
+                    <td><span class="kana">し</span><span class="roma">shi</span></td>
+                    <td><span class="kana">ち</span><span class="roma">chi</span></td>
+                    <td><span class="kana">に</span><span class="roma">ni</span></td>
+                    <td><span class="kana">ひ</span><span class="roma">hi</span></td>
+                    <td><span class="kana">み</span><span class="roma">mi</span></td>
+                    <td class="empty"></td>
+                    <td><span class="kana">り</span><span class="roma">ri</span></td>
+                    <td class="empty"></td>
+                  </tr>
+                  <tr>
+                    <td><span class="kana">う</span><span class="roma">u</span></td>
+                    <td><span class="kana">く</span><span class="roma">ku</span></td>
+                    <td><span class="kana">す</span><span class="roma">su</span></td>
+                    <td><span class="kana">つ</span><span class="roma">tsu</span></td>
+                    <td><span class="kana">ぬ</span><span class="roma">nu</span></td>
+                    <td><span class="kana">ふ</span><span class="roma">fu</span></td>
+                    <td><span class="kana">む</span><span class="roma">mu</span></td>
+                    <td><span class="kana">ゆ</span><span class="roma">yu</span></td>
+                    <td><span class="kana">る</span><span class="roma">ru</span></td>
+                    <td class="empty"></td>
+                  </tr>
+                  <tr>
+                    <td><span class="kana">え</span><span class="roma">e</span></td>
+                    <td><span class="kana">け</span><span class="roma">ke</span></td>
+                    <td><span class="kana">せ</span><span class="roma">se</span></td>
+                    <td><span class="kana">て</span><span class="roma">te</span></td>
+                    <td><span class="kana">ね</span><span class="roma">ne</span></td>
+                    <td><span class="kana">へ</span><span class="roma">he</span></td>
+                    <td><span class="kana">め</span><span class="roma">me</span></td>
+                    <td class="empty"></td>
+                    <td><span class="kana">れ</span><span class="roma">re</span></td>
+                    <td class="empty"></td>
+                  </tr>
+                  <tr>
+                    <td><span class="kana">お</span><span class="roma">o</span></td>
+                    <td><span class="kana">こ</span><span class="roma">ko</span></td>
+                    <td><span class="kana">そ</span><span class="roma">so</span></td>
+                    <td><span class="kana">と</span><span class="roma">to</span></td>
+                    <td><span class="kana">の</span><span class="roma">no</span></td>
+                    <td><span class="kana">ほ</span><span class="roma">ho</span></td>
+                    <td><span class="kana">も</span><span class="roma">mo</span></td>
+                    <td><span class="kana">よ</span><span class="roma">yo</span></td>
+                    <td><span class="kana">ろ</span><span class="roma">ro</span></td>
+                    <td><span class="kana">を</span><span class="roma">wo</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+
+              <!-- ページ2: その他 -->
+              <div id="gojuon-extra" style="display:none;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+              <table class="gojuon-table">
+                <thead><tr>
+                  <th>が行</th><th>ざ行</th><th>だ行</th><th>ば行</th><th>ぱ行</th>
+                  <th>きゃ行</th><th>しゃ行</th><th>ちゃ行</th><th>にゃ行</th><th>ひゃ行</th>
+                </tr></thead>
+                <tbody>
+                  <tr>
+                    <td><span class="kana">が</span><span class="roma">ga</span></td>
+                    <td><span class="kana">ざ</span><span class="roma">za</span></td>
+                    <td><span class="kana">だ</span><span class="roma">da</span></td>
+                    <td><span class="kana">ば</span><span class="roma">ba</span></td>
+                    <td><span class="kana">ぱ</span><span class="roma">pa</span></td>
+                    <td><span class="kana">きゃ</span><span class="roma">kya</span></td>
+                    <td><span class="kana">しゃ</span><span class="roma">sha</span></td>
+                    <td><span class="kana">ちゃ</span><span class="roma">cha</span></td>
+                    <td><span class="kana">にゃ</span><span class="roma">nya</span></td>
+                    <td><span class="kana">ひゃ</span><span class="roma">hya</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="kana">ぎ</span><span class="roma">gi</span></td>
+                    <td><span class="kana">じ</span><span class="roma">ji</span></td>
+                    <td><span class="kana">ぢ</span><span class="roma">di</span></td>
+                    <td><span class="kana">び</span><span class="roma">bi</span></td>
+                    <td><span class="kana">ぴ</span><span class="roma">pi</span></td>
+                    <td><span class="kana">きゅ</span><span class="roma">kyu</span></td>
+                    <td><span class="kana">しゅ</span><span class="roma">shu</span></td>
+                    <td><span class="kana">ちゅ</span><span class="roma">chu</span></td>
+                    <td><span class="kana">にゅ</span><span class="roma">nyu</span></td>
+                    <td><span class="kana">ひゅ</span><span class="roma">hyu</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="kana">ぐ</span><span class="roma">gu</span></td>
+                    <td><span class="kana">ず</span><span class="roma">zu</span></td>
+                    <td><span class="kana">づ</span><span class="roma">du</span></td>
+                    <td><span class="kana">ぶ</span><span class="roma">bu</span></td>
+                    <td><span class="kana">ぷ</span><span class="roma">pu</span></td>
+                    <td><span class="kana">きょ</span><span class="roma">kyo</span></td>
+                    <td><span class="kana">しょ</span><span class="roma">sho</span></td>
+                    <td><span class="kana">ちょ</span><span class="roma">cho</span></td>
+                    <td><span class="kana">にょ</span><span class="roma">nyo</span></td>
+                    <td><span class="kana">ひょ</span><span class="roma">hyo</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="kana">げ</span><span class="roma">ge</span></td>
+                    <td><span class="kana">ぜ</span><span class="roma">ze</span></td>
+                    <td><span class="kana">で</span><span class="roma">de</span></td>
+                    <td><span class="kana">べ</span><span class="roma">be</span></td>
+                    <td><span class="kana">ぺ</span><span class="roma">pe</span></td>
+                    <td><span class="kana">みゃ</span><span class="roma">mya</span></td>
+                    <td><span class="kana">じゃ</span><span class="roma">ja</span></td>
+                    <td><span class="kana">ぎゃ</span><span class="roma">gya</span></td>
+                    <td><span class="kana">りゃ</span><span class="roma">rya</span></td>
+                    <td><span class="kana">びゃ</span><span class="roma">bya</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="kana">ご</span><span class="roma">go</span></td>
+                    <td><span class="kana">ぞ</span><span class="roma">zo</span></td>
+                    <td><span class="kana">ど</span><span class="roma">do</span></td>
+                    <td><span class="kana">ぼ</span><span class="roma">bo</span></td>
+                    <td><span class="kana">ぽ</span><span class="roma">po</span></td>
+                    <td><span class="kana">みゅ</span><span class="roma">myu</span></td>
+                    <td><span class="kana">じゅ</span><span class="roma">ju</span></td>
+                    <td><span class="kana">ぎゅ</span><span class="roma">gyu</span></td>
+                    <td><span class="kana">りゅ</span><span class="roma">ryu</span></td>
+                    <td><span class="kana">びゅ</span><span class="roma">byu</span></td>
+                  </tr>
+                  <tr>
+                    <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+                    <td><span class="kana">みょ</span><span class="roma">myo</span></td>
+                    <td><span class="kana">じょ</span><span class="roma">jo</span></td>
+                    <td><span class="kana">ぎょ</span><span class="roma">gyo</span></td>
+                    <td><span class="kana">りょ</span><span class="roma">ryo</span></td>
+                    <td><span class="kana">びょ</span><span class="roma">byo</span></td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" style="font-size:0.72rem;color:var(--text-light);text-align:left;padding:8px 10px;">
+                      ※ っ（小つ）：子音を2回入力　例：kk→っk→「っか」/ tt→っt→「った」
+                    </td>
+                    <td><span class="kana">ぴゃ</span><span class="roma">pya</span></td>
+                    <td><span class="kana">ふぁ</span><span class="roma">fa</span></td>
+                    <td><span class="kana">ふぃ</span><span class="roma">fi</span></td>
+                    <td><span class="kana">ふぇ</span><span class="roma">fe</span></td>
+                    <td><span class="kana">ふぉ</span><span class="roma">fo</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="howto-step">
+          <div class="howto-num">3</div>
+          <div class="howto-body">
+            <div class="howto-step-title" data-ja="練習記録を保存＆SNSでシェアする" data-en="Save & share on SNS">練習記録を保存＆SNSでシェアする</div>
+            <p class="howto-step-desc" data-ja="「練習記録を画像でダウンロード」ボタンで、Unicationロゴ入りの画像が保存できます。InstagramやXなどでシェアしてみましょう！" data-en="Tap 'Download Practice as Image' to save an image with the Unication logo. Share it on Instagram, X, and more!">「練習記録を画像でダウンロード」ボタンで、Unicationロゴ入りの画像が保存できます。InstagramやXなどでシェアしてみましょう！</p>
+          </div>
+        </div>
+
+        <div class="howto-step">
+          <div class="howto-num">4</div>
+          <div class="howto-body">
+            <div class="howto-step-title">
+              <span data-ja="自己紹介カードを作ってチャットに送信！" data-en="Make a self-intro card and send it in chat!">自己紹介カードを作ってチャットに送信！</span>
+              <span class="step-badge" data-ja="応用" data-en="Advanced">応用</span>
+            </div>
+            <p class="howto-step-desc" data-ja="「わたしのなまえは〇〇です。よろしくおねがいします。」のように自己紹介を入力→画像でダウンロード→Unicationのチャットに送ると日本人講師と会話できます！" data-en="Type a self-intro like 'わたしのなまえは〇〇です。よろしくおねがいします。', download as an image, and send it in Unication's chat to talk with a Japanese instructor!">「わたしのなまえは〇〇です。よろしくおねがいします。」のように自己紹介を入力→画像でダウンロード→Unicationのチャットに送ると日本人講師と会話できます！</p>
+            <button class="howto-step-btn" onclick="scrollToConversation()" data-ja="💬 日本語で会話練習してみる →" data-en="💬 Try Japanese Conversation →">💬 日本語で会話練習してみる →</button>
+          </div>
+        </div>
+
+        <div class="howto-step">
+          <div class="howto-num">5</div>
+          <div class="howto-body">
+            <div class="howto-step-title">
+              <span data-ja="スマホのキーボードを日本語設定にしよう" data-en="Set your keyboard to Japanese">スマホのキーボードを日本語設定にしよう</span>
+              <span class="step-badge" data-ja="応用" data-en="Advanced">応用</span>
+            </div>
+            <p class="howto-step-desc" data-ja="デバイスに日本語キーボードを追加すると、普段のチャットでもそのまま日本語が打てます。" data-en="Add a Japanese keyboard to your device so you can type Japanese anytime in chat.">デバイスに日本語キーボードを追加すると、普段のチャットでもそのまま日本語が打てます。</p>
+            <div class="device-btn-row">
+              <button class="device-tab active" onclick="switchDevice('iphone',this)">📱 iPhone</button>
+              <button class="device-tab" onclick="switchDevice('android',this)">🤖 Android</button>
+              <button class="device-tab" onclick="switchDevice('windows',this)">💻 Windows</button>
+              <button class="device-tab" onclick="switchDevice('mac',this)">🍎 Mac</button>
+            </div>
+            <div id="dev-iphone" class="device-panel active">
+              <ul class="device-steps">
+                <li><span class="ds-num">1</span><span data-ja="「設定」アプリを開く" data-en="Open 'Settings'">「設定」アプリを開く</span></li>
+                <li><span class="ds-num">2</span><span data-ja="「一般」→「キーボード」をタップ" data-en="Tap 'General' → 'Keyboard'">「一般」→「キーボード」をタップ</span></li>
+                <li><span class="ds-num">3</span><span data-ja="「キーボード」→「新しいキーボードを追加」をタップ" data-en="Tap 'Keyboards' → 'Add New Keyboard'">「キーボード」→「新しいキーボードを追加」をタップ</span></li>
+                <li><span class="ds-num">4</span><span data-ja="「日本語」を選択し「かな」または「ローマ字」を選ぶ" data-en="Select 'Japanese' and choose 'Kana' or 'Romaji'">「日本語」を選択し「かな」または「ローマ字」を選ぶ</span></li>
+                <li><span class="ds-num">5</span><span data-ja="「完了」を押して完了。キーボードの🌐ボタンで切り替えられます。" data-en="Tap 'Done'. Switch using the 🌐 button on the keyboard.">「完了」を押して完了。キーボードの🌐ボタンで切り替えられます。</span></li>
+              </ul>
+            </div>
+            <div id="dev-android" class="device-panel">
+              <ul class="device-steps">
+                <li><span class="ds-num">1</span><span data-ja="「設定」→「一般管理」→「言語と入力」を開く" data-en="'Settings' → 'General Management' → 'Language and Input'">「設定」→「一般管理」→「言語と入力」を開く</span></li>
+                <li><span class="ds-num">2</span><span data-ja="「スクリーンキーボード」→ 使用中のキーボード（Gboardなど）をタップ" data-en="'On-screen Keyboard' → tap your keyboard app (e.g. Gboard)">「スクリーンキーボード」→ 使用中のキーボード（Gboardなど）をタップ</span></li>
+                <li><span class="ds-num">3</span><span data-ja="「言語」→「キーボードを追加」→「日本語」を選択して保存" data-en="'Languages' → 'Add Keyboard' → Select 'Japanese' and save">「言語」→「キーボードを追加」→「日本語」を選択して保存</span></li>
+                <li><span class="ds-num">4</span><span data-ja="キーボードの🌐または言語アイコンで切り替えられます。" data-en="Switch using the 🌐 or language icon on the keyboard.">キーボードの🌐または言語アイコンで切り替えられます。</span></li>
+              </ul>
+            </div>
+            <div id="dev-windows" class="device-panel">
+              <ul class="device-steps">
+                <li><span class="ds-num">1</span><span data-ja="スタート →「設定」→「時刻と言語」→「言語と地域」を開く" data-en="Start → 'Settings' → 'Time & Language' → 'Language & Region'">スタート →「設定」→「時刻と言語」→「言語と地域」を開く</span></li>
+                <li><span class="ds-num">2</span><span data-ja="「言語の追加」→「日本語」を検索して選択→「インストール」" data-en="'Add a language' → Search 'Japanese' → Select → 'Install'">「言語の追加」→「日本語」を検索して選択→「インストール」</span></li>
+                <li><span class="ds-num">3</span><span data-ja="タスクバーの言語アイコン（ENG等）から「日本語」に切り替え" data-en="Click the language icon (e.g. ENG) in the taskbar and switch to 'Japanese'">タスクバーの言語アイコン（ENG等）から「日本語」に切り替え</span></li>
+                <li><span class="ds-num">4</span><span data-ja="「あ」アイコンをクリックするとひらがな/カタカナ入力ができます。" data-en="Click 'あ' to enable hiragana/katakana input.">「あ」アイコンをクリックするとひらがな/カタカナ入力ができます。</span></li>
+              </ul>
+            </div>
+            <div id="dev-mac" class="device-panel">
+              <ul class="device-steps">
+                <li><span class="ds-num">1</span><span data-ja="Appleメニュー →「システム設定」を開く" data-en="Apple menu → Open 'System Settings'">Appleメニュー →「システム設定」を開く</span></li>
+                <li><span class="ds-num">2</span><span data-ja="「キーボード」→「入力ソース」→「編集」をクリック" data-en="'Keyboard' → 'Input Sources' → Click 'Edit'">「キーボード」→「入力ソース」→「編集」をクリック</span></li>
+                <li><span class="ds-num">3</span><span data-ja="「＋」→「日本語」→「ひらがな」を選択して「追加」" data-en="Click '+' → 'Japanese' → 'Hiragana' → 'Add'">「＋」→「日本語」→「ひらがな」を選択して「追加」</span></li>
+                <li><span class="ds-num">4</span><span data-ja="メニューバーの入力メニューから日本語に切り替えられます。" data-en="Switch to Japanese from the input menu in the menu bar.">メニューバーの入力メニューから日本語に切り替えられます。</span></li>
+                <li><span class="ds-num">5</span><span data-ja="「英数」キーでローマ字、「かな」キーでかな入力に切り替えられます。" data-en="Press 'Eisu' for romaji or 'Kana' for kana input.">「英数」キーでローマ字、「かな」キーでかな入力に切り替えられます。</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /howto-steps -->
+    </div>
+  </div>
+
+</div><!-- /unified-card -->
+
+<!-- 接続バナー：使い方②と練習ツールをつなぐ -->
+<div class="practice-connection">
+  <div>
+    <div class="practice-connection-text" data-ja="⬆️ 使い方②を参考に、実際に入力してみましょう！" data-en="⬆️ Refer to Step ② above and try typing!">⬆️ 使い方②を参考に、実際に入力してみましょう！</div>
+    <div class="practice-connection-sub" data-ja="50音対応表を見ながら、下のキーボードで練習できます。" data-en="Use the kana chart above as a guide, and practice with the keyboard below.">50音対応表を見ながら、下のキーボードで練習できます。</div>
+  </div>
+</div>
+
+<!-- 練習ツール（枠付き） -->
+<div class="practice-box">
+  <!-- グラデーションヘッダー -->
+  <div class="uc-section-header" style="background:linear-gradient(135deg,#1a5c3a,var(--blue-mid));">
+    <div class="uc-section-icon">⌨️</div>
+    <div>
+      <div class="uc-section-label" data-ja="無料・練習ツール" data-en="Free Practice Tool">無料・練習ツール</div>
+      <div class="uc-section-title" data-ja="日本語を練習してみる" data-en="Try Japanese Practice">日本語を練習してみる</div>
+    </div>
+  </div>
+  <div class="kb-section-body" id="practice">
+      <!-- mode -->
+      <div class="mode-row">
+        <span class="mode-label" data-ja="入力モード：" data-en="Mode:">入力モード：</span>
+        <button class="mode-btn active" onclick="setMode('hiragana',this)" data-ja="ひらがな" data-en="Hiragana">ひらがな</button>
+        <button class="mode-btn" onclick="setMode('katakana',this)" data-ja="カタカナ" data-en="Katakana">カタカナ</button>
+        <button class="mode-btn" onclick="setMode('romaji',this)" data-ja="ローマ字" data-en="Romaji">ローマ字</button>
+      </div>
+      <!-- display -->
+      <div class="kb-display">
+        <div class="kb-display-top">
+          <span class="kb-display-label" data-ja="入力中" data-en="Input">入力中</span>
+          <div class="kb-btn-row">
+            <button class="kb-clear" onclick="deleteChar()" data-ja="1文字削除" data-en="Delete 1">1文字削除</button>
+            <button class="kb-clear" onclick="clearAll()" data-ja="全消去" data-en="Clear All">全消去</button>
+          </div>
+        </div>
+        <div class="kb-romaji" id="dispRomaji"></div>
+        <div class="kb-kana" id="dispKana"><span class="kb-cursor"></span></div>
+      </div>
+      <!-- hint -->
+      <div class="hint-bar">
+        <span>💡</span>
+        <span id="hintText" data-ja="キーをタップ、またはパソコン・スマホのキーボードでも入力できます！「nn」→「ん」、BackspaceやEnterも使えます。" data-en="Tap the keys, or type directly from your device keyboard! 'nn' → 'ん', Backspace and Enter also work.">キーをタップ、またはパソコン・スマホのキーボードでも入力できます！「nn」→「ん」、BackspaceやEnterも使えます。</span>
+      </div>
+      <!-- keyboard -->
+      <div class="keyboard-wrap" id="keyboard"></div>
+      <!-- download -->
+      <div class="btn-dl-wrap">
+        <button class="btn-dl" onclick="downloadImage()" data-ja="📸 練習記録を画像でダウンロード" data-en="📸 Download Practice as Image">📸 練習記録を画像でダウンロード</button>
+      </div><!-- /kb-section-body -->
+</div><!-- /practice-box -->
+</div><!-- /practice-panel -->
+
+<!-- ===== OTHER CARDS ===== -->
+<div class="other-cards">
+
+  <!-- 会話練習 -->
+  <div class="course-card free" id="conversation">
+    <div class="card-bar"></div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-icon-wrap">🗾</div>
+        <div>
+          <div class="card-tag" data-ja="基本無料" data-en="Free">基本無料</div>
+          <h2 class="card-title" data-ja="日本語で会話練習をする" data-en="Japanese Conversation Practice">日本語で会話練習をする</h2>
+        </div>
+      </div>
+      <p class="card-desc" data-ja="チャットを通じて日本語を自由に練習できます。日常会話・文化・表現など、気軽に質問してみましょう。日本人の講師があなたの練習をサポートします。" data-en="Freely practice Japanese through chat. Ask about everyday conversation, culture, and expressions. Japanese instructors will support you.">チャットを通じて日本語を自由に練習できます。日常会話・文化・表現など、気軽に質問してみましょう。日本人の講師があなたの練習をサポートします。</p>
+      <ul class="card-features">
+        <li><span class="feat-check">✓</span><span data-ja="日常会話・あいさつの練習" data-en="Everyday conversation and greetings">日常会話・あいさつの練習</span></li>
+        <li><span class="feat-check">✓</span><span data-ja="日本の文化・表現を学ぶ" data-en="Learn Japanese culture and expressions">日本の文化・表現を学ぶ</span></li>
+        <li><span class="feat-check">✓</span><span data-ja="チャット形式でいつでも質問" data-en="Ask anytime via chat">チャット形式でいつでも質問</span></li>
+        <li><span class="feat-check">✓</span><span data-ja="ネイティブ講師が対応" data-en="Native instructors respond">ネイティブ講師が対応</span></li>
+      </ul>
+      <div class="card-divider"></div>
+      <div class="btn-row">
+        <a href="terms.html" class="btn-chat" data-ja="💬 チャットで会話してみる" data-en="💬 Try Chatting">💬 チャットで会話してみる</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 文法コース -->
+  <div class="course-card paid" id="grammar">
+    <div class="card-bar"></div>
+    <div class="card-body">
+      <div class="card-header">
+        <div class="card-icon-wrap">📝</div>
+        <div>
+          <div><span class="card-tag" data-ja="有料プラン" data-en="Paid Plan">有料プラン</span><span class="paid-ribbon">💴 Paid</span></div>
+          <h2 class="card-title" style="margin-top:8px;" data-ja="日本語文法を学ぶ" data-en="Learn Japanese Grammar">日本語文法を学ぶ</h2>
+        </div>
+      </div>
+      <p class="card-desc" data-ja="専用教材に沿って、日本語の文法を体系的に学習します。基礎から応用まで段階的にしっかり身につけられます。" data-en="Learn Japanese grammar systematically using dedicated materials. Build solid skills step by step from basics to advanced.">専用教材に沿って、日本語の文法を体系的に学習します。基礎から応用まで段階的にしっかり身につけられます。</p>
+      <ul class="card-features">
+        <li><span class="feat-check">✓</span><span data-ja="専用教材を使った体系的な学習" data-en="Systematic learning with dedicated materials">専用教材を使った体系的な学習</span></li>
+        <li><span class="feat-check">✓</span><span data-ja="基礎〜応用まで段階的に対応" data-en="Step-by-step from basics to advanced">基礎〜応用まで段階的に対応</span></li>
+        <li><span class="feat-check">✓</span><span data-ja="チャットで丁寧に解説" data-en="Detailed explanations via chat">チャットで丁寧に解説</span></li>
+        <li><span class="feat-check">✓</span><span data-ja="文法の定着をサポート" data-en="Support for grammar retention">文法の定着をサポート</span></li>
+        <li><span class="feat-check">✓</span><span data-ja="オンラインでの音声指導" data-en="Online audio instruction">オンラインでの音声指導</span></li>
+        <li><span class="feat-check">✓</span><span data-ja="オンラインでの実際の会話練習" data-en="Online real conversation practice">オンラインでの実際の会話練習</span></li>
+      </ul>
+      <div class="coming-box"><span>🚧</span><span data-ja="教材の詳細・価格は準備中です。近日公開予定ですので、もうしばらくお待ちください。" data-en="Details and pricing are coming soon. Please wait a little longer.">教材の詳細・価格は準備中です。近日公開予定ですので、もうしばらくお待ちください。</span></div>
+      <div class="warn-box"><span>⚠️</span><span data-ja="本コースは有料プランです。無料体験でサービスを確認してからお申し込みいただけます。" data-en="This is a paid plan. Try the free trial before enrolling.">本コースは有料プランです。無料体験でサービスを確認してからお申し込みいただけます。</span></div>
+      <div class="card-divider"></div>
+      <div class="btn-row">
+        <a href="https://forms.gle/rqebGGe1tqJhhoEM7" target="_blank" class="btn-trial" data-ja="🆓 無料で体験してみる" data-en="🆓 Try for Free">🆓 無料で体験してみる</a>
+        <a href="https://forms.gle/4xWxFJfS7MUPvjuEA" target="_blank" class="btn-enroll" data-ja="📝 日本語文法コースに申し込む" data-en="📝 Enroll in Grammar Course">📝 日本語文法コースに申し込む</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot-logo"><span class="uni">Uni</span><span class="cation">cation</span></div>
+  <p data-ja="「学びたい。」を我慢しない。" data-en="Don't hold back your desire to learn.">「学びたい。」を我慢しない。</p>
+  <p style="margin-top:10px;">© 2025 Unication. All rights reserved.</p>
+  <p style="margin-top:12px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+    <a href="terms.html" style="color:rgba(255,255,255,0.45);font-size:0.8rem;text-decoration:underline;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'" data-ja="利用規約・プライバシーポリシー" data-en="Terms & Privacy Policy">利用規約・プライバシーポリシー</a>
+    <a href="https://drive.google.com/file/d/1x5r35Sqj6LYiTih1Vpq-fCvCmmFeDw9V/view?usp=sharing" target="_blank" style="color:rgba(255,255,255,0.45);font-size:0.8rem;text-decoration:underline;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'" data-ja="特定商取引法に基づく表記" data-en="Tokusho-ho Disclosure">特定商取引法に基づく表記</a>
+  </p>
+</footer>
+
+<script>
+// ===== FLOATING DOTS =====
+const dotsEl = document.getElementById('heroDots');
+for(let i=0;i<18;i++){
+  const d=document.createElement('div');d.classList.add('fdot');
+  const s=Math.random()*10+5;
+  d.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;bottom:${Math.random()*30}%;animation-duration:${Math.random()*8+6}s;animation-delay:${Math.random()*-14}s;`;
+  dotsEl.appendChild(d);
+}
+
+// ===== LANG =====
+let currentLang='ja';
+function applyLang(lang){
+  currentLang=lang;
+  document.querySelectorAll('[data-ja]').forEach(el=>{
+    const t=el.getAttribute('data-'+lang);
+    if(t) el.innerHTML=t;
+  });
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.documentElement.lang=lang==='ja'?'ja':'en';
+  buildKeyboard();
+  updateHint();
+}
+document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
+
+// ===== SCROLL REVEAL =====
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('visible');});
+},{threshold:0.07});
+document.querySelectorAll('.course-card,.howto-step').forEach(el=>io.observe(el));
+
+// ===== 50音タブ切り替え =====
+function switchGojuon(page, btn){
+  document.getElementById('gojuon-basic').style.display = page==='basic'?'block':'none';
+  document.getElementById('gojuon-extra').style.display = page==='extra'?'block':'none';
+  document.querySelectorAll('.gojuon-tab').forEach(b=>{
+    b.style.color = b===btn ? 'var(--navy)' : 'var(--text-light)';
+    b.style.borderBottom = b===btn ? '3px solid var(--navy)' : '3px solid transparent';
+  });
+}
+
+// ===== 50音 TOGGLE =====
+function toggleGojuon(btn){
+  const wrap=document.getElementById('gojuonWrap');
+  const open=wrap.classList.toggle('open');
+  const ja=open?'📋 50音対応表を非表示にする ▲':'📋 50音対応表を表示する ▼';
+  const en=open?'📋 Hide Kana Chart ▲':'📋 Show Kana Chart ▼';
+  btn.setAttribute('data-ja',ja); btn.setAttribute('data-en',en);
+  btn.textContent=currentLang==='en'?en:ja;
+}
+
+// ===== DEVICE TABS =====
+function switchDevice(id,btn){
+  document.querySelectorAll('.device-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.device-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('dev-'+id).classList.add('active');
+}
+
+// ===== SCROLL TO CONVERSATION =====
+function scrollToConversation(){
+  document.getElementById('conversation').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ===== ROMAJI → KANA =====
+const hiraganaMap={
+  'a':'あ','i':'い','u':'う','e':'え','o':'お',
+  'ka':'か','ki':'き','ku':'く','ke':'け','ko':'こ',
+  'sa':'さ','shi':'し','su':'す','se':'せ','so':'そ','si':'し',
+  'ta':'た','chi':'ち','tsu':'つ','te':'て','to':'と','ti':'ち','tu':'つ',
+  'na':'な','ni':'に','nu':'ぬ','ne':'ね','no':'の',
+  'ha':'は','hi':'ひ','fu':'ふ','he':'へ','ho':'ほ','hu':'ふ',
+  'ma':'ま','mi':'み','mu':'む','me':'め','mo':'も',
+  'ya':'や','yu':'ゆ','yo':'よ',
+  'ra':'ら','ri':'り','ru':'る','re':'れ','ro':'ろ',
+  'wa':'わ','wo':'を','nn':'ん',
+  'ga':'が','gi':'ぎ','gu':'ぐ','ge':'げ','go':'ご',
+  'za':'ざ','ji':'じ','zu':'ず','ze':'ぜ','zo':'ぞ','zi':'じ',
+  'da':'だ','di':'ぢ','du':'づ','de':'で','do':'ど',
+  'ba':'ば','bi':'び','bu':'ぶ','be':'べ','bo':'ぼ',
+  'pa':'ぱ','pi':'ぴ','pu':'ぷ','pe':'ぺ','po':'ぽ',
+  // きゃ行
+  'kya':'きゃ','kyi':'きぃ','kyu':'きゅ','kye':'きぇ','kyo':'きょ',
+  // しゃ行
+  'sha':'しゃ','shi':'し','shu':'しゅ','she':'しぇ','sho':'しょ',
+  'sya':'しゃ','syi':'しぃ','syu':'しゅ','sye':'しぇ','syo':'しょ',
+  // ちゃ行
+  'cha':'ちゃ','chi':'ち','chu':'ちゅ','che':'ちぇ','cho':'ちょ',
+  'tya':'ちゃ','tyi':'ちぃ','tyu':'ちゅ','tye':'ちぇ','tyo':'ちょ',
+  // にゃ行
+  'nya':'にゃ','nyi':'にぃ','nyu':'にゅ','nye':'にぇ','nyo':'にょ',
+  // ひゃ行
+  'hya':'ひゃ','hyi':'ひぃ','hyu':'ひゅ','hye':'ひぇ','hyo':'ひょ',
+  // みゃ行
+  'mya':'みゃ','myi':'みぃ','myu':'みゅ','mye':'みぇ','myo':'みょ',
+  // りゃ行
+  'rya':'りゃ','ryi':'りぃ','ryu':'りゅ','rye':'りぇ','ryo':'りょ',
+  // ぎゃ行
+  'gya':'ぎゃ','gyi':'ぎぃ','gyu':'ぎゅ','gye':'ぎぇ','gyo':'ぎょ',
+  // じゃ行
+  'ja':'じゃ','ju':'じゅ','jo':'じょ',
+  'jya':'じゃ','jyi':'じぃ','jyu':'じゅ','jye':'じぇ','jyo':'じょ',
+  'zya':'じゃ','zyi':'じぃ','zyu':'じゅ','zye':'じぇ','zyo':'じょ',
+  // びゃ行
+  'bya':'びゃ','byi':'びぃ','byu':'びゅ','bye':'びぇ','byo':'びょ',
+  // ぴゃ行
+  'pya':'ぴゃ','pyi':'ぴぃ','pyu':'ぴゅ','pye':'ぴぇ','pyo':'ぴょ',
+  // ふゃ行
+  'fa':'ふぁ','fi':'ふぃ','fe':'ふぇ','fo':'ふぉ',
+  // てぃ・でぃ等
+  'thi':'てぃ','thu':'てゅ','tho':'てょ',
+  'dhi':'でぃ','dhu':'でゅ','dho':'でょ',
+  // ヴ系（カタカナ向けだが一応）
+  'va':'ゔぁ','vi':'ゔぃ','vu':'ゔ','ve':'ゔぇ','vo':'ゔぉ',
+  // 小文字単独
+  'xa':'ぁ','xi':'ぃ','xu':'ぅ','xe':'ぇ','xo':'ぉ',
+  'xya':'ゃ','xyu':'ゅ','xyo':'ょ','xtu':'っ','xtsu':'っ',
+  'ltu':'っ','ltsu':'っ',
+  // っ（子音重ね）は processKey で別途処理
+};
+const katakanaMap={};
+Object.entries(hiraganaMap).forEach(([r,h])=>{katakanaMap[r]=h.replace(/[\u3041-\u3096]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60));});
+
+let mode='hiragana',romajiBuffer='',kanaText='',romajiText='';
+
+function updateHint(){
+  const h={
+    ja:{
+      hiragana:'キーをタップ、またはパソコン・スマホのキーボードでも入力できます！「nn」→「ん」',
+      katakana:'ローマ字でカタカナに変換されます。パソコン・スマホのキーボードでも入力できます。',
+      romaji:'アルファベットをそのまま入力します。キーボードから直接入力もできます。'
+    },
+    en:{
+      hiragana:"Tap keys or type from your keyboard! 'nn' → 'ん', Backspace & Enter work too.",
+      katakana:"Romaji converts to katakana. You can also type from your device keyboard.",
+      romaji:'Type alphabet letters directly. Physical keyboard input is supported.'
+    }
+  };
+  document.getElementById('hintText').textContent=h[currentLang][mode];
+}
+
+function setMode(m,btn){
+  mode=m;romajiBuffer='';
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  updateHint();
+}
+
+// 入力履歴（かなとローマ字の対応を記録）
+let inputHistory=[];
+
+function processKey(key){
+  if(mode==='romaji'){
+    kanaText+=key;romajiText+=key;
+    inputHistory.push({kana:key,roma:key});
+    updateDisplay();return;
+  }
+  const map=mode==='katakana'?katakanaMap:hiraganaMap;
+
+  if(key==='n'){
+    if(romajiBuffer==='n'){
+      const kana=map['nn'];
+      kanaText+=kana;romajiText+='n';
+      inputHistory.push({kana:kana,roma:'nn'});
+      romajiBuffer='';updateDisplay();return;
+    }
+    romajiBuffer+='n';romajiText+='n';updateDisplay();return;
+  }
+
+  if(romajiBuffer==='n'&&!'aiueoyn'.includes(key)){
+    const kana=map['nn'];
+    kanaText+=kana;
+    inputHistory.push({kana:kana,roma:'n'});
+    romajiBuffer='';
+  }
+
+  // っ：同じ子音が連続したとき（nn以外）
+  if(romajiBuffer.length>0 && key!=='n' && key===romajiBuffer.slice(-1) && !'aiueo'.includes(key)){
+    const tsu = mode==='katakana'?'ッ':'っ';
+    kanaText+=tsu;
+    inputHistory.push({kana:tsu,roma:key});
+    romajiBuffer='';
+  }
+
+  romajiBuffer+=key;romajiText+=key;
+
+  let matched=false;
+  for(let len=Math.min(romajiBuffer.length,4);len>=1;len--){
+    const chunk=romajiBuffer.slice(-len);
+    if(map[chunk]){
+      const kana=map[chunk];
+      kanaText+=kana;
+      inputHistory.push({kana:kana,roma:chunk});
+      romajiBuffer='';matched=true;break;
+    }
+  }
+  if(!matched&&romajiBuffer.length>=4){
+    kanaText+=romajiBuffer[0];
+    inputHistory.push({kana:romajiBuffer[0],roma:romajiBuffer[0]});
+    romajiBuffer=romajiBuffer.slice(1);
+  }
+  updateDisplay();
+}
+
+// ===== PHYSICAL KEYBOARD INPUT =====
+document.addEventListener('keydown', e => {
+  // キーボードがフォーカスされていないときのみ（入力フィールドがある場合を除く）
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+  // 練習パネルが表示されているか確認
+  const practiceEl = document.getElementById('practice');
+  if(!practiceEl) return;
+
+  const key = e.key;
+
+  if(key==='Backspace'){e.preventDefault();deleteChar();return;}
+  if(key==='Enter'){e.preventDefault();addNewline();return;}
+  if(key===' '){e.preventDefault();addSpace();return;}
+  if(key==='Escape'){clearAll();return;}
+  // アルファベット1文字のみ処理
+  if(/^[a-zA-Z]$/.test(key)){
+    e.preventDefault();
+    // キーボード上のキーをアニメーション
+    const keyBtns = document.querySelectorAll('#keyboard .key');
+    keyBtns.forEach(btn => {
+      const mainEl = btn.querySelector('.key-main');
+      if(mainEl && mainEl.textContent.toLowerCase() === key.toLowerCase()){
+        btn.classList.add('pressed');
+        setTimeout(()=>btn.classList.remove('pressed'),150);
+      }
+    });
+    processKey(key.toLowerCase());
+  }
+});
+
+function deleteChar(){
+  if(romajiBuffer.length>0){
+    romajiBuffer=romajiBuffer.slice(0,-1);
+    romajiText=romajiText.slice(0,-1);
+  } else if(inputHistory.length>0){
+    const last=inputHistory.pop();
+    kanaText=kanaText.slice(0,-([...last.kana].length));
+    romajiText=romajiText.slice(0,-(last.roma.length));
+  }
+  updateDisplay();
+}
+function addSpace(){kanaText+='　';romajiText+=' ';romajiBuffer='';inputHistory.push({kana:'　',roma:' '});updateDisplay();}
+function addNewline(){kanaText+='\n';romajiText+='\n';romajiBuffer='';inputHistory.push({kana:'\n',roma:'\n'});updateDisplay();}
+function clearAll(){kanaText='';romajiText='';romajiBuffer='';inputHistory=[];updateDisplay();}
+
+function updateDisplay(){
+  const kEl=document.getElementById('dispKana');
+  const rEl=document.getElementById('dispRomaji');
+  const pending=romajiBuffer?`<span style="color:#6ecfa0;border-bottom:2px solid #6ecfa0">${romajiBuffer}</span>`:'';
+  kEl.innerHTML=kanaText.split('\n').join('<br>')+pending+'<span class="kb-cursor"></span>';
+  rEl.textContent=romajiText;
+}
+
+// ===== BUILD KEYBOARD =====
+const KB_ROWS=[['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['DEL','Z','X','C','V','B','N','M','ENT'],['SPACE']];
+
+function buildKeyboard(){
+  const L={ja:{DEL:'削除',ENT:'改行',SPACE:'スペース'},en:{DEL:'Delete',ENT:'Enter',SPACE:'Space'}};
+  const wrap=document.getElementById('keyboard');wrap.innerHTML='';
+  KB_ROWS.forEach(row=>{
+    const rowEl=document.createElement('div');rowEl.className='kb-row';
+    row.forEach(k=>{
+      const btn=document.createElement('button');btn.className='key';
+      if(k==='SPACE'){btn.classList.add('special','space-key');btn.innerHTML=`<span class="key-main">${L[currentLang].SPACE}</span>`;btn.addEventListener('click',addSpace);}
+      else if(k==='ENT'){btn.classList.add('special','enter-key');btn.innerHTML=`<span class="key-main">${L[currentLang].ENT}</span>`;btn.addEventListener('click',addNewline);}
+      else if(k==='DEL'){btn.classList.add('special','delete-key');btn.innerHTML=`<span class="key-main">${L[currentLang].DEL}</span>`;btn.addEventListener('click',deleteChar);}
+      else{
+        btn.innerHTML=`<span class="key-main">${k}</span>`;
+        btn.addEventListener('click',()=>{btn.classList.add('pressed');setTimeout(()=>btn.classList.remove('pressed'),120);processKey(k.toLowerCase());});
+      }
+      rowEl.appendChild(btn);
+    });
+    wrap.appendChild(rowEl);
+  });
+}
+
+// ===== DOWNLOAD =====
+function downloadImage(){
+  const W=800, H=520;
+  const canvas=document.createElement('canvas');
+  canvas.width=W; canvas.height=H;
+  const ctx=canvas.getContext('2d');
+
+  // 背景
+  const bg=ctx.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0,'#f0f5ff');bg.addColorStop(0.5,'#eef4fc');bg.addColorStop(1,'#ddeeff');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+
+  // カード
+  ctx.fillStyle='white';ctx.shadowColor='rgba(30,58,110,0.12)';ctx.shadowBlur=24;
+  ctx.beginPath();ctx.roundRect(36,36,W-72,H-72,20);ctx.fill();ctx.shadowBlur=0;
+
+  // トップバー
+  const bar=ctx.createLinearGradient(36,0,W-36,0);
+  bar.addColorStop(0,'#1E3A6E');bar.addColorStop(1,'#3A6FC5');
+  ctx.fillStyle=bar;ctx.beginPath();ctx.roundRect(36,36,W-72,7,[20,20,0,0]);ctx.fill();
+
+  // ロゴ
+  ctx.font='bold 26px Comfortaa,sans-serif';
+  const ug=ctx.createLinearGradient(58,0,118,0);
+  ug.addColorStop(0,'#6ecfa0');ug.addColorStop(1,'#f5c842');
+  ctx.fillStyle=ug;ctx.fillText('Uni',58,96);
+  ctx.fillStyle='#1E3A6E';ctx.fillText('cation',106,96);
+
+  // バッジ
+  ctx.fillStyle='#EEF4FC';ctx.beginPath();ctx.roundRect(58,110,130,24,12);ctx.fill();
+  ctx.fillStyle='#3A6FC5';ctx.font='bold 11px sans-serif';ctx.fillText('日本語練習記録',68,126);
+
+  // 日付
+  const now=new Date();
+  const ds=`${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')}`;
+  ctx.fillStyle='#7a9ac0';ctx.font='13px sans-serif';
+  ctx.textAlign='right';ctx.fillText(ds,W-58,96);ctx.textAlign='left';
+
+  // 区切り線
+  ctx.strokeStyle='#D6E4F7';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(58,146);ctx.lineTo(W-58,146);ctx.stroke();
+
+  // ===== テキスト描画（自動フォントサイズ調整） =====
+  const text = kanaText || '（まだ入力がありません）';
+  const lines = text.split('\n').filter(l => l.length > 0);
+
+  // 描画エリア
+  const areaX = 58;
+  const areaW = W - 116;       // 左右マージン
+  const areaTop = 158;
+  const areaBottom = H - 110;  // フッター用スペース確保
+  const areaH = areaBottom - areaTop;
+
+  // フォントサイズを文字数・行数に応じて自動計算
+  const maxCharsPerLine = Math.max(...lines.map(l=>[...l].length));
+  const totalLines = lines.length;
+
+  // 横幅に合わせたフォントサイズ（最大48px、最小12px）
+  let fontSize = Math.min(48, Math.max(12, Math.floor(areaW / (maxCharsPerLine * 0.65))));
+  const lineH = Math.round(fontSize * 1.5);
+
+  // 縦にも収まるか確認して縮小
+  while (lineH * totalLines > areaH && fontSize > 12) {
+    fontSize -= 1;
+  }
+  const finalLineH = Math.round(fontSize * 1.5);
+
+  ctx.fillStyle='#1a2a4a';
+  ctx.font=`bold ${fontSize}px sans-serif`;
+
+  // テキストが長い行は折り返す
+  let y = areaTop + fontSize;
+  for (const line of lines) {
+    if (!line) { y += finalLineH; continue; }
+    // 1行が描画幅を超える場合は折り返し
+    const chars = [...line];
+    let row = '';
+    for (const ch of chars) {
+      const test = row + ch;
+      if (ctx.measureText(test).width > areaW && row.length > 0) {
+        ctx.fillText(row, areaX, y);
+        y += finalLineH;
+        row = ch;
+      } else {
+        row = test;
+      }
+    }
+    if (row) { ctx.fillText(row, areaX, y); y += finalLineH; }
+    if (y > areaBottom) break;
+  }
+
+  // ローマ字（小さく）
+  if (romajiText) {
+    ctx.fillStyle='#7a9ac0';ctx.font='13px sans-serif';
+    const rText = romajiText.slice(0, 90);
+    ctx.fillText(rText, areaX, Math.min(y + 10, areaBottom + 10));
+  }
+
+  // フッター
+  ctx.strokeStyle='#D6E4F7';
+  ctx.beginPath();ctx.moveTo(58,H-88);ctx.lineTo(W-58,H-88);ctx.stroke();
+  ctx.fillStyle='#2B5BA8';ctx.font='bold 13px sans-serif';
+  ctx.fillText('https://naoaki28.github.io/HP/',58,H-62);
+  ctx.fillStyle='#7a9ac0';ctx.font='12px sans-serif';
+  ctx.fillText('Unicationで日本語を練習しよう！',58,H-42);
+
+  // ダウンロード
+  const link=document.createElement('a');
+  link.download=`unication_${ds.replace(/\//g,'')}.png`;
+  link.href=canvas.toDataURL('image/png');
+  link.click();
+}
+
+// ===== INIT =====
+buildKeyboard();
+updateDisplay();
+updateHint();
+
+// ===== DRAW VERTICAL LINE THROUGH ALL STEPS =====
+function drawStepLine() {
+  const stepsEl = document.querySelector('.howto-steps');
+  if (!stepsEl) return;
+  // 既存のsvg線を削除
+  const old = stepsEl.querySelector('.step-line-svg');
+  if (old) old.remove();
+
+  const nums = stepsEl.querySelectorAll('.howto-num');
+  if (nums.length < 2) return;
+
+  const containerRect = stepsEl.getBoundingClientRect();
+  const firstRect = nums[0].getBoundingClientRect();
+  const lastRect  = nums[nums.length - 1].getBoundingClientRect();
+
+  const topY    = firstRect.top + firstRect.height / 2 - containerRect.top;
+  const bottomY = lastRect.top  + lastRect.height  / 2 - containerRect.top;
+  const x = firstRect.left + firstRect.width / 2 - containerRect.left;
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.classList.add('step-line-svg');
+  svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible;';
+
+  const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+  const grad = document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+  grad.setAttribute('id','stepLineGrad');grad.setAttribute('x1','0');grad.setAttribute('y1','0');grad.setAttribute('x2','0');grad.setAttribute('y2','1');
+  const s1 = document.createElementNS('http://www.w3.org/2000/svg','stop');
+  s1.setAttribute('offset','0%');s1.setAttribute('stop-color','#3A6FC5');
+  const s2 = document.createElementNS('http://www.w3.org/2000/svg','stop');
+  s2.setAttribute('offset','100%');s2.setAttribute('stop-color','#D6E4F7');
+  grad.appendChild(s1);grad.appendChild(s2);defs.appendChild(grad);svg.appendChild(defs);
+
+  const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+  line.setAttribute('x1', x); line.setAttribute('x2', x);
+  line.setAttribute('y1', topY); line.setAttribute('y2', bottomY);
+  line.setAttribute('stroke','url(#stepLineGrad)');
+  line.setAttribute('stroke-width','2');
+  svg.appendChild(line);
+  stepsEl.style.position = 'relative';
+  stepsEl.appendChild(svg);
+}
+
+// 初回＋スクロール後（reveal後）に再描画
+setTimeout(drawStepLine, 200);
+setTimeout(drawStepLine, 800);
+window.addEventListener('resize', drawStepLine);
+
+// Auto-scroll to hash
+window.addEventListener('load',()=>{
+  const hash=location.hash.replace('#','');
+  if(hash){setTimeout(()=>{const el=document.getElementById(hash);if(el) el.scrollIntoView({behavior:'smooth',block:'start'});},300);}
+});
+</script>
+</body>
+</html>

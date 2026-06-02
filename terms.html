@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>利用規約・プライバシーポリシー — Unication</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1E3A6E;--blue:#2B5BA8;--blue-mid:#3A6FC5;--blue-light:#5B8DD9;
+    --blue-pale:#D6E4F7;--blue-bg:#EEF4FC;
+    --white:#fff;--off-white:#F5F8FE;
+    --text-dark:#1a2a4a;--text-mid:#3a5080;--text-light:#7a9ac0;
+    --yellow:#F5C842;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Noto Sans JP','DM Sans',sans-serif;background:var(--off-white);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;}
+
+  /* NAV */
+  .lang-bar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--blue-pale);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;}
+  .logo-nav{font-family:'Comfortaa',cursive;font-weight:700;font-size:1.4rem;text-decoration:none;}
+  .logo-nav .uni{background:linear-gradient(90deg,#6ecfa0,#f5c842);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .logo-nav .cation{color:var(--navy);-webkit-text-fill-color:var(--navy);}
+  .nav-right{display:flex;align-items:center;gap:14px;}
+  .back-btn{color:var(--text-mid);font-size:0.85rem;text-decoration:none;font-weight:500;transition:color 0.2s;}
+  .back-btn:hover{color:var(--navy);}
+  .lang-toggle{display:flex;gap:4px;background:var(--blue-bg);border-radius:20px;padding:3px;}
+  .lang-btn{border:none;cursor:pointer;border-radius:16px;padding:5px 14px;font-size:0.8rem;font-weight:600;transition:all 0.2s;background:transparent;color:var(--text-mid);}
+  .lang-btn.active{background:var(--navy);color:white;}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--navy),var(--blue));padding:100px 40px 48px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E");}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.2);font-size:0.72rem;font-weight:800;padding:5px 16px;border-radius:20px;margin-bottom:16px;letter-spacing:0.1em;text-transform:uppercase;position:relative;z-index:1;}
+  .hero-title{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;color:white;margin-bottom:10px;position:relative;z-index:1;}
+  .hero-sub{font-size:0.9rem;color:rgba(255,255,255,0.65);position:relative;z-index:1;}
+
+  /* MAIN */
+  main{flex:1;max-width:820px;margin:0 auto;padding:40px 40px 80px;width:100%;}
+
+  /* SECTION TABS */
+  .section-tabs{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap;}
+  .section-tab{padding:10px 24px;border-radius:24px;border:2px solid var(--blue-pale);background:white;font-size:0.88rem;font-weight:700;cursor:pointer;font-family:inherit;color:var(--text-mid);transition:all 0.2s;text-decoration:none;display:inline-block;}
+  .section-tab:hover{border-color:var(--blue-mid);color:var(--navy);}
+
+  /* DOCUMENT BLOCK */
+  .doc-block{background:white;border-radius:24px;border:1px solid var(--blue-pale);overflow:hidden;margin-bottom:24px;box-shadow:0 4px 24px rgba(30,58,110,0.07);}
+  .doc-header{padding:24px 28px;background:linear-gradient(135deg,var(--navy),var(--blue-mid));display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
+  .doc-header:hover{opacity:0.95;}
+  .doc-header-left{display:flex;align-items:center;gap:14px;}
+  .doc-header-icon{width:44px;height:44px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+  .doc-header-text{}
+  .doc-header-en{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:3px;}
+  .doc-header-title{font-size:1.2rem;font-weight:700;color:white;}
+  .doc-header-date{font-size:0.75rem;color:rgba(255,255,255,0.55);margin-top:3px;}
+  .doc-chevron{color:white;font-size:1.2rem;transition:transform 0.3s;flex-shrink:0;}
+  .doc-chevron.open{transform:rotate(180deg);}
+  .doc-body{display:none;padding:0;}
+  .doc-body.open{display:block;}
+
+  /* CHAPTER */
+  .chapter{border-bottom:1px solid var(--blue-pale);}
+  .chapter:last-child{border-bottom:none;}
+  .chapter-header{padding:16px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:var(--off-white);transition:background 0.2s;user-select:none;}
+  .chapter-header:hover{background:var(--blue-bg);}
+  .chapter-title{font-size:0.95rem;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:10px;}
+  .chapter-badge{background:var(--blue-mid);color:white;font-size:0.65rem;font-weight:800;padding:2px 9px;border-radius:10px;letter-spacing:0.04em;}
+  .chapter-chevron{color:var(--text-light);font-size:0.9rem;transition:transform 0.25s;}
+  .chapter-chevron.open{transform:rotate(180deg);}
+  .chapter-body{display:none;padding:20px 28px;background:white;}
+  .chapter-body.open{display:block;}
+
+  /* ARTICLE */
+  .article{margin-bottom:20px;}
+  .article:last-child{margin-bottom:0;}
+  .article-title{font-size:0.88rem;font-weight:700;color:var(--navy);margin-bottom:8px;padding-bottom:5px;border-bottom:1px dashed var(--blue-pale);}
+  .article-text{font-size:0.84rem;color:var(--text-mid);line-height:1.85;font-weight:300;}
+  .article-text ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:8px;}
+  .article-text ul li{padding-left:16px;position:relative;}
+  .article-text ul li::before{content:'・';position:absolute;left:0;color:var(--blue-mid);}
+  .article-text p{margin-bottom:6px;}
+  .article-text strong{font-weight:700;color:var(--navy);display:block;margin:10px 0 5px;}
+  .article-text .note{font-size:0.78rem;color:var(--text-light);margin-top:8px;font-style:italic;}
+  .plan-box{background:var(--blue-bg);border-radius:12px;padding:14px 16px;margin:10px 0;border-left:3px solid var(--blue-mid);}
+  .plan-box.paid{background:#fffbea;border-left-color:#e8c84a;}
+  .plan-title{font-size:0.8rem;font-weight:800;color:var(--navy);margin-bottom:6px;}
+  .plan-box.paid .plan-title{color:#7a5c00;}
+
+  /* CTA BOX */
+  .cta-box{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:20px;padding:28px 32px;text-align:center;margin-top:32px;}
+  .cta-box-note{font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:20px;}
+  .cta-box-note strong{color:white;font-weight:700;}
+  .cta-btn{display:inline-block;text-decoration:none;background:white;color:var(--navy);padding:13px 32px;border-radius:26px;font-size:0.95rem;font-weight:700;font-family:inherit;border:none;cursor:pointer;transition:all 0.25s;box-shadow:0 4px 18px rgba(0,0,0,0.15);}
+  .cta-btn:hover{background:var(--yellow);transform:translateY(-2px);}
+  .cta-btn-sub{display:block;margin-top:12px;font-size:0.76rem;color:rgba(255,255,255,0.55);}
+
+  /* FOOTER */
+  footer{background:#0d1d40;padding:36px 40px;text-align:center;color:rgba(255,255,255,0.38);font-size:0.8rem;}
+  .foot-logo{font-family:'Comfortaa',cursive;font-size:1.2rem;font-weight:700;margin-bottom:8px;}
+  .foot-logo .uni{background:linear-gradient(90deg,#6ecfa0,#f5c842);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .foot-logo .cation{color:white;-webkit-text-fill-color:white;}
+
+  @media(max-width:640px){
+    .lang-bar{padding:0 16px;}
+    .hero{padding:88px 20px 36px;}
+    main{padding:28px 16px 60px;}
+    .doc-header{padding:18px 20px;}
+    .chapter-header{padding:14px 20px;}
+    .chapter-body{padding:16px 20px;}
+    .cta-box{padding:22px 20px;}
+    .section-tabs{gap:8px;}
+    .section-tab{padding:8px 16px;font-size:0.82rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="lang-bar">
+  <a href="index.html" class="logo-nav"><span class="uni">Uni</span><span class="cation">cation</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="back-btn" data-ja="← ホームへ" data-en="← Home">← ホームへ</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="ja">JP</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge" data-ja="法的文書" data-en="Legal Documents">法的文書</div>
+  <h1 class="hero-title" data-ja="利用規約・プライバシーポリシー" data-en="Terms of Service & Privacy Policy">利用規約・プライバシーポリシー</h1>
+  <p class="hero-sub" data-ja="制定日：2026年6月1日" data-en="Enacted: June 1, 2026">制定日：2026年6月1日</p>
+</div>
+
+<main>
+
+  <!-- クイックナビ -->
+  <div class="section-tabs">
+    <a href="#terms" class="section-tab" data-ja="📋 利用規約" data-en="📋 Terms of Service">📋 利用規約</a>
+    <a href="#privacy" class="section-tab" data-ja="🔒 プライバシーポリシー" data-en="🔒 Privacy Policy">🔒 プライバシーポリシー</a>
+  </div>
+
+  <!-- ===== 利用規約 ===== -->
+  <div class="doc-block" id="terms">
+    <div class="doc-header" onclick="toggleDoc(this)">
+      <div class="doc-header-left">
+        <div class="doc-header-icon">📋</div>
+        <div class="doc-header-text">
+          <div class="doc-header-en">Terms of Service</div>
+          <div class="doc-header-title" data-ja="利用規約" data-en="Terms of Service">利用規約</div>
+          <div class="doc-header-date" data-ja="制定日：2026年6月1日" data-en="Enacted: June 1, 2026">制定日：2026年6月1日</div>
+        </div>
+      </div>
+      <span class="doc-chevron open">▲</span>
+    </div>
+    <div class="doc-body open">
+
+      <!-- 第1章 総則 -->
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge">第1章</span><span data-ja="総則" data-en="General Provisions">総則</span></div>
+          <span class="chapter-chevron open">▼</span>
+        </div>
+        <div class="chapter-body open">
+          <div class="article">
+            <div class="article-title" data-ja="第1条（目的）" data-en="Article 1 (Purpose)">第1条（目的）</div>
+            <div class="article-text" data-ja="本利用規約（以下「本規約」といいます）は、Unication（以下「当サービス」といいます）が提供するチャット型学習支援サービスの利用条件を定めるものです。ユーザーは本規約に同意した上で当サービスを利用するものとします。" data-en="These Terms of Service (hereinafter 'Terms') define the conditions for using the chat-based learning support service provided by Unication (hereinafter 'Service'). Users must agree to these Terms before using the Service.">本利用規約（以下「本規約」といいます）は、Unication（以下「当サービス」といいます）が提供するチャット型学習支援サービスの利用条件を定めるものです。ユーザーは本規約に同意した上で当サービスを利用するものとします。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第2条（定義）" data-en="Article 2 (Definitions)">第2条（定義）</div>
+            <div class="article-text">
+              <ul>
+                <li data-ja="「当サービス」とは、Unicationが提供する学習支援チャットサービス及び関連するすべてのサービスを指します。" data-en="'Service' refers to the learning support chat service provided by Unication and all related services.">「当サービス」とは、Unicationが提供する学習支援チャットサービス及び関連するすべてのサービスを指します。</li>
+                <li data-ja="「ユーザー」とは、本規約に同意し当サービスに登録した者を指します。" data-en="'User' refers to a person who has agreed to these Terms and registered with the Service.">「ユーザー」とは、本規約に同意し当サービスに登録した者を指します。</li>
+                <li data-ja="「学習者」とは、学習支援を受けることを目的として登録したユーザーを指します。" data-en="'Learner' refers to a user who has registered for the purpose of receiving learning support.">「学習者」とは、学習支援を受けることを目的として登録したユーザーを指します。</li>
+                <li data-ja="「講師」とは、招待コードを用いて登録し、学習支援を提供するユーザーを指します。" data-en="'Instructor' refers to a user who has registered using an invitation code and provides learning support.">「講師」とは、招待コードを用いて登録し、学習支援を提供するユーザーを指します。</li>
+                <li data-ja="「管理者」とは、当サービスの運営・管理を行う者を指します。" data-en="'Administrator' refers to the person who operates and manages the Service.">「管理者」とは、当サービスの運営・管理を行う者を指します。</li>
+                <li data-ja="「コンテンツ」とは、当サービスを通じて提供される教材・メッセージ・画像等の情報を指します。" data-en="'Content' refers to information such as teaching materials, messages, and images provided through the Service.">「コンテンツ」とは、当サービスを通じて提供される教材・メッセージ・画像等の情報を指します。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第3条（規約への同意）" data-en="Article 3 (Agreement to Terms)">第3条（規約への同意）</div>
+            <div class="article-text" data-ja="ユーザーは、当サービスの利用を開始した時点で本規約に同意したものとみなします。未成年者がご利用の場合は、保護者の同意を得た上でご利用ください。" data-en="Users are deemed to have agreed to these Terms upon beginning use of the Service. Minors must obtain parental consent before using the Service.">ユーザーは、当サービスの利用を開始した時点で本規約に同意したものとみなします。未成年者がご利用の場合は、保護者の同意を得た上でご利用ください。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第4条（規約の変更）" data-en="Article 4 (Changes to Terms)">第4条（規約の変更）</div>
+            <div class="article-text" data-ja="当サービスは、必要に応じて本規約を変更することができます。変更後の規約は、当サービス内のお知らせ機能を通じてユーザーに通知します。変更後も継続して当サービスを利用した場合、変更後の規約に同意したものとみなします。" data-en="The Service may change these Terms as necessary. Changes will be notified to users through the in-app notification feature. Continued use of the Service after changes constitutes acceptance of the revised Terms.">当サービスは、必要に応じて本規約を変更することができます。変更後の規約は、当サービス内のお知らせ機能を通じてユーザーに通知します。変更後も継続して当サービスを利用した場合、変更後の規約に同意したものとみなします。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第2章 アカウント -->
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge">第2章</span><span data-ja="アカウント" data-en="Account">アカウント</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-title" data-ja="第5条（アカウント登録）" data-en="Article 5 (Account Registration)">第5条（アカウント登録）</div>
+            <div class="article-text">
+              <p data-ja="当サービスの利用には、メールアドレスとパスワードによるアカウント登録が必要です。" data-en="Use of the Service requires registration with an email address and password.">当サービスの利用には、メールアドレスとパスワードによるアカウント登録が必要です。</p>
+              <ul>
+                <li data-ja="ユーザーは真実・正確な情報を入力して登録するものとします。" data-en="Users must register with true and accurate information.">ユーザーは真実・正確な情報を入力して登録するものとします。</li>
+                <li data-ja="ニックネームは他のユーザーと重複して使用することができません。" data-en="Nicknames may not duplicate those of other users.">ニックネームは他のユーザーと重複して使用することができません。</li>
+                <li data-ja="講師アカウントの登録には所定の招待コードが必要です。招待コードは管理者が発行・管理します。" data-en="Registration as an instructor requires an official invitation code, which is issued and managed by the administrator.">講師アカウントの登録には所定の招待コードが必要です。招待コードは管理者が発行・管理します。</li>
+                <li data-ja="一人のユーザーが複数のアカウントを作成することを禁止します。" data-en="Creating multiple accounts is prohibited.">一人のユーザーが複数のアカウントを作成することを禁止します。</li>
+                <li data-ja="パスワードはユーザーが責任をもって管理するものとします。パスワードを忘れた場合は「お問い合わせ」から再設定の依頼ができます。" data-en="Users are responsible for managing their own passwords. If you forget your password, you can request a reset via the 'Contact' form.">パスワードはユーザーが責任をもって管理するものとします。パスワードを忘れた場合は「お問い合わせ」から再設定の依頼ができます。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第6条（アカウントの管理）" data-en="Article 6 (Account Management)">第6条（アカウントの管理）</div>
+            <div class="article-text" data-ja="ユーザーは自身のアカウント情報（メールアドレス・パスワード）を適切に管理する責任を負います。第三者による不正利用が判明した場合は、速やかに管理者に連絡してください。パスワードの漏洩による損害について、当サービスは責任を負いません。" data-en="Users are responsible for appropriately managing their account information (email address and password). If unauthorized use by a third party is discovered, please contact the administrator immediately. The Service is not responsible for damages resulting from password leaks.">ユーザーは自身のアカウント情報（メールアドレス・パスワード）を適切に管理する責任を負います。第三者による不正利用が判明した場合は、速やかに管理者に連絡してください。パスワードの漏洩による損害について、当サービスは責任を負いません。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第7条（アカウントの停止・削除）" data-en="Article 7 (Account Suspension/Deletion)">第7条（アカウントの停止・削除）</div>
+            <div class="article-text">
+              <p data-ja="以下の場合、管理者は事前通知なくアカウントを停止または削除することができます。" data-en="In the following cases, the administrator may suspend or delete accounts without prior notice.">以下の場合、管理者は事前通知なくアカウントを停止または削除することができます。</p>
+              <ul>
+                <li data-ja="本規約に違反した場合" data-en="Violation of these Terms">本規約に違反した場合</li>
+                <li data-ja="虚偽の情報を登録した場合" data-en="Registration with false information">虚偽の情報を登録した場合</li>
+                <li data-ja="他のユーザーに対する迷惑行為・ハラスメントが認められた場合" data-en="Nuisance or harassment toward other users">他のユーザーに対する迷惑行為・ハラスメントが認められた場合</li>
+                <li data-ja="当サービスの運営を妨害する行為を行った場合" data-en="Actions that interfere with Service operations">当サービスの運営を妨害する行為を行った場合</li>
+                <li data-ja="その他、管理者が不適切と判断した場合" data-en="Other cases deemed inappropriate by the administrator">その他、管理者が不適切と判断した場合</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第3章 サービス内容・料金 -->
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge">第3章</span><span data-ja="サービス内容・料金" data-en="Service & Pricing">サービス内容・料金</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-title" data-ja="第8条（サービスの内容）" data-en="Article 8 (Service Content)">第8条（サービスの内容）</div>
+            <div class="article-text">
+              <ul>
+                <li data-ja="学習者と講師・管理者間のチャット機能" data-en="Chat function between learners, instructors, and administrators">学習者と講師・管理者間のチャット機能</li>
+                <li data-ja="定期配信メッセージによる学習支援" data-en="Learning support via regular message delivery">定期配信メッセージによる学習支援</li>
+                <li data-ja="プッシュ通知機能" data-en="Push notification function">プッシュ通知機能</li>
+                <li data-ja="日本語・英語・教科学習に関するコンテンツの提供" data-en="Content on Japanese, English, and academic subjects">日本語・英語・教科学習に関するコンテンツの提供</li>
+                <li data-ja="日本語文法学習コース（提供予定）" data-en="Japanese grammar learning course (coming soon)">日本語文法学習コース（提供予定）</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第9条（無料プランと有料プラン）" data-en="Article 9 (Free & Paid Plans)">第9条（無料プランと有料プラン）</div>
+            <div class="article-text">
+              <div class="plan-box">
+                <div class="plan-title" data-ja="無料プラン" data-en="Free Plan">無料プラン</div>
+                <ul>
+                  <li data-ja="月間メッセージ送信回数に上限を設けます（上限数は管理者が設定）。" data-en="Monthly message limit applies (set by administrator).">月間メッセージ送信回数に上限を設けます（上限数は管理者が設定）。</li>
+                  <li data-ja="基本的なチャット機能・定期配信機能を利用できます。" data-en="Basic chat and regular delivery features available.">基本的なチャット機能・定期配信機能を利用できます。</li>
+                  <li data-ja="オンラインで開催するユーザーまたは学習者向けの学習イベントに参加できます。" data-en="Participation in online learning events for users/learners.">オンラインで開催するユーザーまたは学習者向けの学習イベントに参加できます。</li>
+                </ul>
+              </div>
+              <div class="plan-box paid">
+                <div class="plan-title" data-ja="有料プラン（詳細は別途告知）" data-en="Paid Plan (details announced separately)">有料プラン（詳細は別途告知）</div>
+                <ul>
+                  <li data-ja="月間メッセージ送信回数の上限を拡大または無制限にできます。" data-en="Expanded or unlimited monthly message limit.">月間メッセージ送信回数の上限を拡大または無制限にできます。</li>
+                  <li data-ja="日本語文法学習コース等の有料コンテンツを利用できます。" data-en="Access to paid content such as the Japanese grammar course.">日本語文法学習コース等の有料コンテンツを利用できます。</li>
+                  <li data-ja="団体利用の場合は団体ごとにサービスを提案・提供します。" data-en="Group plans proposed and provided individually.">団体利用の場合は団体ごとにサービスを提案・提供します。</li>
+                </ul>
+                <p class="note" data-ja="※ 月間メッセージ送信回数は毎月1日にリセットされます。" data-en="※ Monthly message count resets on the 1st of each month.">※ 月間メッセージ送信回数は毎月1日にリセットされます。</p>
+              </div>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第10条（料金の支払い）" data-en="Article 10 (Payment)">第10条（料金の支払い）</div>
+            <div class="article-text" data-ja="有料プランの料金については、当サービスが定める方法により支払うものとします。支払い済みの料金の返金については、法令に基づく場合を除き原則として行いません。詳細な返金ポリシーは有料プラン開始時に別途定めます。" data-en="Paid plan fees shall be paid by the method specified by the Service. Refunds for paid fees are generally not provided except as required by law. Detailed refund policies will be established separately when paid plans launch.">有料プランの料金については、当サービスが定める方法により支払うものとします。支払い済みの料金の返金については、法令に基づく場合を除き原則として行いません。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第11条（メッセージ送信回数の上限）" data-en="Article 11 (Message Limit)">第11条（メッセージ送信回数の上限）</div>
+            <div class="article-text" data-ja="管理者は、各学習者ユーザーに対して月間のメッセージ送信可能回数を個別に設定することができます。上限に達した場合、当該月内はメッセージの送信ができなくなります。上限の変更を希望する場合は管理者にお問い合わせください。" data-en="The administrator may individually set the monthly message limit for each learner. Once the limit is reached, no further messages can be sent for that month. Contact the administrator to request a limit change.">管理者は、各学習者ユーザーに対して月間のメッセージ送信可能回数を個別に設定することができます。上限に達した場合、当該月内はメッセージの送信ができなくなります。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第4章 禁止事項 -->
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge">第4章</span><span data-ja="禁止事項" data-en="Prohibited Activities">禁止事項</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-title" data-ja="第12条（禁止事項）" data-en="Article 12 (Prohibited Activities)">第12条（禁止事項）</div>
+            <div class="article-text">
+              <ul>
+                <li data-ja="他のユーザーや第三者に対する誹謗・中傷・ハラスメント行為" data-en="Defamation, slander, or harassment toward other users or third parties">他のユーザーや第三者に対する誹謗・中傷・ハラスメント行為</li>
+                <li data-ja="個人情報・プライバシーを侵害する行為" data-en="Acts that infringe on personal information or privacy">個人情報・プライバシーを侵害する行為</li>
+                <li data-ja="著作権・商標権等の知的財産権を侵害する行為" data-en="Acts that infringe on intellectual property rights such as copyrights or trademarks">著作権・商標権等の知的財産権を侵害する行為</li>
+                <li data-ja="当サービスの教材・コンテンツの無断複製・転用・販売" data-en="Unauthorized reproduction, repurposing, or sale of Service materials and content">当サービスの教材・コンテンツの無断複製・転用・販売</li>
+                <li data-ja="当サービスのシステムに対する不正アクセス・ハッキング行為" data-en="Unauthorized access or hacking of the Service's systems">当サービスのシステムに対する不正アクセス・ハッキング行為</li>
+                <li data-ja="スパム・宣伝目的のメッセージ送信" data-en="Sending spam or promotional messages">スパム・宣伝目的のメッセージ送信</li>
+                <li data-ja="虚偽の情報を流布する行為" data-en="Spreading false information">虚偽の情報を流布する行為</li>
+                <li data-ja="法令または公序良俗に反する行為" data-en="Acts contrary to laws or public morals">法令または公序良俗に反する行為</li>
+                <li data-ja="その他、管理者が不適切と判断する行為" data-en="Other acts deemed inappropriate by the administrator">その他、管理者が不適切と判断する行為</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第5章 知的財産権 -->
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge">第5章</span><span data-ja="知的財産権" data-en="Intellectual Property">知的財産権</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-title" data-ja="第13条（コンテンツの著作権）" data-en="Article 13 (Content Copyright)">第13条（コンテンツの著作権）</div>
+            <div class="article-text" data-ja="当サービスが提供する教材・日本語文法学習コース・画像・デザイン等のコンテンツに関する著作権は、当サービス運営者または正当な権利者に帰属します。ユーザーは個人的な学習目的の利用のみに限定し、無断での複製・転用・販売等を行ってはなりません。" data-en="Copyrights for content provided by the Service, including teaching materials, the Japanese grammar course, images, and designs, belong to the Service operator or legitimate rights holders. Users may only use such content for personal learning purposes and must not reproduce, repurpose, or sell it without permission.">当サービスが提供する教材・日本語文法学習コース・画像・デザイン等のコンテンツに関する著作権は、当サービス運営者または正当な権利者に帰属します。ユーザーは個人的な学習目的の利用のみに限定し、無断での複製・転用・販売等を行ってはなりません。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第14条（ユーザーが投稿したコンテンツ）" data-en="Article 14 (User-Posted Content)">第14条（ユーザーが投稿したコンテンツ）</div>
+            <div class="article-text" data-ja="ユーザーがチャットに投稿したメッセージ・画像等のコンテンツに関する著作権はユーザーに帰属します。ただし、当サービスの運営・改善のために必要な範囲で利用することに同意するものとします。" data-en="Copyright for content such as messages and images posted by users in chat belongs to the users. However, users agree to allow the Service to use such content to the extent necessary for operating and improving the Service.">ユーザーがチャットに投稿したメッセージ・画像等のコンテンツに関する著作権はユーザーに帰属します。ただし、当サービスの運営・改善のために必要な範囲で利用することに同意するものとします。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第6〜8章（まとめ） -->
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge">第6〜8章</span><span data-ja="変更・停止・免責・準拠法" data-en="Changes, Disclaimer & Jurisdiction">変更・停止・免責・準拠法</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-title" data-ja="第15条（サービスの変更・停止）" data-en="Article 15 (Service Changes/Suspension)">第15条（サービスの変更・停止）</div>
+            <div class="article-text" data-ja="当サービスは、システムのメンテナンス・天災・その他必要と判断した場合に、サービスの全部または一部を予告なく変更・停止・終了することがあります。これによりユーザーに損害が生じた場合でも、当サービスは責任を負いません。" data-en="The Service may change, suspend, or terminate all or part of the Service without prior notice due to system maintenance, natural disasters, or other deemed necessary reasons. The Service is not responsible for any damages to users resulting from this.">当サービスは、システムのメンテナンス・天災・その他必要と判断した場合に、サービスの全部または一部を予告なく変更・停止・終了することがあります。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第16条（データの取り扱い）" data-en="Article 16 (Data Handling)">第16条（データの取り扱い）</div>
+            <div class="article-text" data-ja="退会またはアカウント削除の際、ユーザーのデータ（チャット履歴・登録情報等）は削除されます。なお、チャットメッセージは管理者が設定した保持日数を経過した後に自動削除されます。" data-en="Upon withdrawal or account deletion, user data (chat history, registration information, etc.) will be deleted. Chat messages will be automatically deleted after the retention period set by the administrator.">退会またはアカウント削除の際、ユーザーのデータ（チャット履歴・登録情報等）は削除されます。なお、チャットメッセージは管理者が設定した保持日数を経過した後に自動削除されます。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第17条（免責事項）" data-en="Article 17 (Disclaimer)">第17条（免責事項）</div>
+            <div class="article-text">
+              <ul>
+                <li data-ja="当サービスの利用による学習効果・成績向上の保証" data-en="Guarantee of learning outcomes or grade improvement from use of the Service">当サービスの利用による学習効果・成績向上の保証</li>
+                <li data-ja="通信障害・システム障害によりサービスが利用できなかった場合の損害" data-en="Damages from service unavailability due to communication or system failures">通信障害・システム障害によりサービスが利用できなかった場合の損害</li>
+                <li data-ja="ユーザー間のトラブルによる損害" data-en="Damages from disputes between users">ユーザー間のトラブルによる損害</li>
+                <li data-ja="第三者による不正アクセス・情報漏洩等による損害" data-en="Damages from unauthorized access or information leaks by third parties">第三者による不正アクセス・情報漏洩等による損害</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第18〜20条（準拠法・管轄・お問い合わせ）" data-en="Articles 18–20 (Jurisdiction & Contact)">第18〜20条（準拠法・管轄・お問い合わせ）</div>
+            <div class="article-text" data-ja="本規約の解釈・適用は日本法に準拠します。紛争については管理者の所在地を管轄する裁判所を専属的合意管轄裁判所とします。お問い合わせは当サービス内のお問い合わせフォームよりご連絡ください。" data-en="These Terms are governed by Japanese law. Disputes shall be subject to the exclusive jurisdiction of the court having jurisdiction over the administrator's location. For inquiries, please use the in-app contact form.">本規約の解釈・適用は日本法に準拠します。紛争については管理者の所在地を管轄する裁判所を専属的合意管轄裁判所とします。お問い合わせは当サービス内のお問い合わせフォームよりご連絡ください。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== プライバシーポリシー ===== -->
+  <div class="doc-block" id="privacy">
+    <div class="doc-header" onclick="toggleDoc(this)" style="background:linear-gradient(135deg,#1a5c3a,var(--blue-mid));">
+      <div class="doc-header-left">
+        <div class="doc-header-icon">🔒</div>
+        <div class="doc-header-text">
+          <div class="doc-header-en">Privacy Policy</div>
+          <div class="doc-header-title" data-ja="プライバシーポリシー" data-en="Privacy Policy">プライバシーポリシー</div>
+          <div class="doc-header-date" data-ja="制定日：2026年6月1日" data-en="Enacted: June 1, 2026">制定日：2026年6月1日</div>
+        </div>
+      </div>
+      <span class="doc-chevron">▲</span>
+    </div>
+    <div class="doc-body open">
+
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge" style="background:#2e7d52;">第1条</span><span data-ja="収集する情報" data-en="Information Collected">収集する情報</span></div>
+          <span class="chapter-chevron open">▼</span>
+        </div>
+        <div class="chapter-body open">
+          <div class="article">
+            <div class="article-text">
+              <strong data-ja="ユーザーが直接提供する情報" data-en="Information directly provided by users">ユーザーが直接提供する情報</strong>
+              <ul>
+                <li data-ja="メールアドレス" data-en="Email address">メールアドレス</li>
+                <li data-ja="ニックネーム（表示名）" data-en="Nickname (display name)">ニックネーム（表示名）</li>
+                <li data-ja="パスワード（暗号化して保存）" data-en="Password (stored encrypted)">パスワード（暗号化して保存）</li>
+                <li data-ja="使用目的（日本語学習・英語学習・教科学習）" data-en="Purpose (Japanese, English, or academic learning)">使用目的（日本語学習・英語学習・教科学習）</li>
+                <li data-ja="招待コード（講師登録時のみ）" data-en="Invitation code (instructors only)">招待コード（講師登録時のみ）</li>
+              </ul>
+              <strong data-ja="サービス利用に伴い自動的に収集される情報" data-en="Automatically collected information">サービス利用に伴い自動的に収集される情報</strong>
+              <ul>
+                <li data-ja="チャットメッセージの内容・送受信日時" data-en="Chat message content and timestamps">チャットメッセージの内容・送受信日時</li>
+                <li data-ja="送信した画像ファイル" data-en="Sent image files">送信した画像ファイル</li>
+                <li data-ja="ログイン日時・アクセス記録" data-en="Login timestamps and access logs">ログイン日時・アクセス記録</li>
+                <li data-ja="プッシュ通知用のFCMトークン（デバイス識別情報）" data-en="FCM token for push notifications (device identifier)">プッシュ通知用のFCMトークン（デバイス識別情報）</li>
+                <li data-ja="ポイント付与・使用履歴" data-en="Points earned and usage history">ポイント付与・使用履歴</li>
+                <li data-ja="メッセージ送信回数" data-en="Number of messages sent">メッセージ送信回数</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge" style="background:#2e7d52;">第2条</span><span data-ja="情報の利用目的" data-en="Purpose of Use">情報の利用目的</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-text">
+              <ul>
+                <li data-ja="当サービスの提供・運営・維持・改善" data-en="Providing, operating, maintaining, and improving the Service">当サービスの提供・運営・維持・改善</li>
+                <li data-ja="学習者と講師・管理者間のコミュニケーション支援" data-en="Supporting communication between learners, instructors, and administrators">学習者と講師・管理者間のコミュニケーション支援</li>
+                <li data-ja="定期配信メッセージ・プッシュ通知の送信" data-en="Sending regular messages and push notifications">定期配信メッセージ・プッシュ通知の送信</li>
+                <li data-ja="有料プランの管理・請求処理（今後実施予定）" data-en="Paid plan management and billing (planned)">有料プランの管理・請求処理（今後実施予定）</li>
+                <li data-ja="サービスの安全性確保・不正利用の防止" data-en="Ensuring service security and preventing unauthorized use">サービスの安全性確保・不正利用の防止</li>
+                <li data-ja="統計データの作成（個人を特定しない形式）" data-en="Creating statistical data (in non-personally-identifiable form)">統計データの作成（個人を特定しない形式）</li>
+                <li data-ja="お問い合わせへの対応" data-en="Responding to inquiries">お問い合わせへの対応</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge" style="background:#2e7d52;">第3条</span><span data-ja="第三者への提供" data-en="Disclosure to Third Parties">第三者への提供</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-text">
+              <p data-ja="当サービスは、以下の場合を除き、ユーザーの個人情報を第三者に提供いたしません。" data-en="The Service will not provide users' personal information to third parties except in the following cases.">当サービスは、以下の場合を除き、ユーザーの個人情報を第三者に提供いたしません。</p>
+              <ul>
+                <li data-ja="ユーザーの同意がある場合" data-en="With user consent">ユーザーの同意がある場合</li>
+                <li data-ja="法令に基づく開示が求められた場合" data-en="When disclosure is required by law">法令に基づく開示が求められた場合</li>
+                <li data-ja="人の生命・身体・財産の保護のために必要な場合" data-en="When necessary to protect life, body, or property">人の生命・身体・財産の保護のために必要な場合</li>
+              </ul>
+              <strong data-ja="利用している外部サービス（Google）" data-en="External Services Used (Google)">利用している外部サービス（Google）</strong>
+              <ul>
+                <li>Firebase Authentication（認証）</li>
+                <li>Cloud Firestore（データ保存）</li>
+                <li>Firebase Storage（画像保存）</li>
+                <li>Firebase Cloud Messaging（プッシュ通知）</li>
+                <li>Cloud Functions（自動処理）</li>
+              </ul>
+              <p class="note" data-ja="※ Googleのプライバシーポリシー：https://policies.google.com/privacy" data-en="※ Google Privacy Policy: https://policies.google.com/privacy">※ Googleのプライバシーポリシー：<a href="https://policies.google.com/privacy" target="_blank" style="color:var(--blue-mid);">https://policies.google.com/privacy</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge" style="background:#2e7d52;">第4条</span><span data-ja="情報の管理・保存期間" data-en="Data Management & Retention">情報の管理・保存期間</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-text">
+              <ul>
+                <li data-ja="チャットメッセージは、管理者が設定した保持日数を経過した後に自動的に削除されます。" data-en="Chat messages are automatically deleted after the retention period set by the administrator.">チャットメッセージは、管理者が設定した保持日数を経過した後に自動的に削除されます。</li>
+                <li data-ja="プッシュ通知用のFCMトークンは、無効になった場合に自動削除されます。" data-en="FCM tokens for push notifications are automatically deleted when they become invalid.">プッシュ通知用のFCMトークンは、無効になった場合に自動削除されます。</li>
+                <li data-ja="アカウント削除時には、関連する個人情報を削除します。" data-en="Related personal information is deleted upon account deletion.">アカウント削除時には、関連する個人情報を削除します。</li>
+                <li data-ja="法令により保存が義務付けられている情報については、当該期間保存します。" data-en="Information required to be retained by law will be kept for the applicable period.">法令により保存が義務付けられている情報については、当該期間保存します。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge" style="background:#2e7d52;">第5条</span><span data-ja="セキュリティ" data-en="Security">セキュリティ</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-text">
+              <ul>
+                <li data-ja="Firestoreセキュリティルールによるアクセス制御（ロール別に読み書き権限を管理）" data-en="Access control via Firestore security rules (read/write permissions managed by role)">Firestoreセキュリティルールによるアクセス制御（ロール別に読み書き権限を管理）</li>
+                <li data-ja="パスワードはFirebase Authenticationにより暗号化して管理" data-en="Passwords encrypted and managed by Firebase Authentication">パスワードはFirebase Authenticationにより暗号化して管理</li>
+                <li data-ja="SSL/TLS通信による通信の暗号化" data-en="Communication encrypted via SSL/TLS">SSL/TLS通信による通信の暗号化</li>
+                <li data-ja="FCMトークンのユーザー別管理" data-en="Per-user management of FCM tokens">FCMトークンのユーザー別管理</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge" style="background:#2e7d52;">第6条</span><span data-ja="ユーザーの権利" data-en="User Rights">ユーザーの権利</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-text">
+              <ul>
+                <li data-ja="開示請求：自身の個人情報の開示を求めることができます。" data-en="Disclosure request: Users may request disclosure of their personal information.">開示請求：自身の個人情報の開示を求めることができます。</li>
+                <li data-ja="訂正請求：情報に誤りがある場合、訂正を求めることができます。" data-en="Correction request: Users may request correction if information is inaccurate.">訂正請求：情報に誤りがある場合、訂正を求めることができます。</li>
+                <li data-ja="削除請求：アカウントの削除を求めることができます。" data-en="Deletion request: Users may request account deletion.">削除請求：アカウントの削除を求めることができます。</li>
+                <li data-ja="利用停止請求：個人情報の利用停止を求めることができます。" data-en="Suspension request: Users may request suspension of personal information use.">利用停止請求：個人情報の利用停止を求めることができます。</li>
+              </ul>
+              <p style="margin-top:8px;font-size:0.82rem;color:var(--text-mid);" data-ja="これらの請求は、当サービス内のお問い合わせフォームよりご連絡ください。" data-en="These requests can be made via the in-app contact form.">これらの請求は、当サービス内のお問い合わせフォームよりご連絡ください。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+          <div class="chapter-title"><span class="chapter-badge" style="background:#2e7d52;">第7〜10条</span><span data-ja="通知・未成年・改定・お問い合わせ" data-en="Notifications, Minors & Contact">通知・未成年・改定・お問い合わせ</span></div>
+          <span class="chapter-chevron">▼</span>
+        </div>
+        <div class="chapter-body">
+          <div class="article">
+            <div class="article-title" data-ja="第7条（プッシュ通知・Cookie等）" data-en="Article 7 (Push Notifications & Cookies)">第7条（プッシュ通知・Cookie等）</div>
+            <div class="article-text">
+              <ul>
+                <li data-ja="当サービスは、プッシュ通知の配信のためにFCMトークンを使用します。" data-en="The Service uses FCM tokens to deliver push notifications.">当サービスは、プッシュ通知の配信のためにFCMトークンを使用します。</li>
+                <li data-ja="ユーザーはブラウザまたはデバイスの設定から通知の許可・拒否を変更できます。" data-en="Users can change notification permissions in browser or device settings.">ユーザーはブラウザまたはデバイスの設定から通知の許可・拒否を変更できます。</li>
+                <li data-ja="当サービスはCookieを直接使用していませんが、Firebase等の外部サービスがCookieを使用する場合があります。" data-en="The Service does not directly use cookies, but external services such as Firebase may use them.">当サービスはCookieを直接使用していませんが、Firebase等の外部サービスがCookieを使用する場合があります。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第8条（未成年者の個人情報）" data-en="Article 8 (Minors' Personal Information)">第8条（未成年者の個人情報）</div>
+            <div class="article-text" data-ja="未成年者が当サービスを利用する場合、保護者の同意を得た上でご利用ください。保護者の方からの情報削除等のご要望については、お問い合わせフォームよりご連絡ください。" data-en="Minors must obtain parental consent before using the Service. Parents/guardians may contact us via the contact form for information deletion and other requests.">未成年者が当サービスを利用する場合、保護者の同意を得た上でご利用ください。保護者の方からの情報削除等のご要望については、お問い合わせフォームよりご連絡ください。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第9〜10条（改定・お問い合わせ）" data-en="Articles 9–10 (Revisions & Contact)">第9〜10条（改定・お問い合わせ）</div>
+            <div class="article-text" data-ja="当サービスは、必要に応じて本プライバシーポリシーを改定することがあります。重要な変更がある場合は、当サービス内のお知らせ機能を通じてユーザーに通知します。お問い合わせは当サービス内のお問い合わせフォームよりご連絡ください。" data-en="The Service may revise this Privacy Policy as necessary. Material changes will be notified via the in-app notification feature. For inquiries, please use the in-app contact form.">当サービスは、必要に応じて本プライバシーポリシーを改定することがあります。重要な変更がある場合は、当サービス内のお知らせ機能を通じてユーザーに通知します。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <p class="cta-box-note">
+      <strong data-ja="【同意について】" data-en="【Regarding Agreement】">【同意について】</strong><br>
+      <span data-ja="新規登録した場合は、上記の利用規約・プライバシーポリシーに同意したことになります。下のボタンから新規アカウント作成へ進んでください。" data-en="By registering a new account, you are deemed to have agreed to the Terms of Service and Privacy Policy above. Please proceed to create your account via the button below.">新規登録した場合は、上記の利用規約・プライバシーポリシーに同意したことになります。下のボタンから新規アカウント作成へ進んでください。</span>
+    </p>
+    <a href="https://naoaki28.github.io/Unication/" target="_blank" class="cta-btn" data-ja="新規アカウント作成へ進む →" data-en="Proceed to Create Account →">新規アカウント作成へ進む →</a>
+    <span class="cta-btn-sub" data-ja="※ ボタンを押すと新規アカウント作成ページに移動します" data-en="※ Clicking the button will take you to the account creation page">※ ボタンを押すと新規アカウント作成ページに移動します</span>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-logo"><span class="uni">Uni</span><span class="cation">cation</span></div>
+  <p data-ja="「学びたい。」を我慢しない。" data-en="Don't hold back your desire to learn.">「学びたい。」を我慢しない。</p>
+  <p style="margin-top:10px;">© 2025 Unication. All rights reserved.</p>
+</footer>
+
+<script>
+// Lang
+let currentLang='ja';
+function applyLang(lang){
+  currentLang=lang;
+  document.querySelectorAll('[data-ja]').forEach(el=>{
+    const t=el.getAttribute('data-'+lang);
+    if(t) el.innerHTML=t;
+  });
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.documentElement.lang=lang==='ja'?'ja':'en';
+}
+document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
+
+// Toggle doc block
+function toggleDoc(header){
+  const body=header.nextElementSibling;
+  const chevron=header.querySelector('.doc-chevron');
+  const isOpen=body.classList.toggle('open');
+  chevron.classList.toggle('open',isOpen);
+}
+
+// Toggle chapter
+function toggleChapter(header){
+  const body=header.nextElementSibling;
+  const chevron=header.querySelector('.chapter-chevron');
+  const isOpen=body.classList.toggle('open');
+  chevron.classList.toggle('open',isOpen);
+}
+
+// Smooth scroll to section
+document.querySelectorAll('.section-tab').forEach(tab=>{
+  tab.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=document.querySelector(tab.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// Auto scroll to hash on load
+window.addEventListener('load',()=>{
+  const hash=location.hash;
+  if(hash){
+    const el=document.querySelector(hash);
+    if(el) setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),300);
+  }
+});
+</script>
+</body>
+</html>
