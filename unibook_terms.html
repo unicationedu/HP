@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>利用規約・プライバシーポリシー — Unibook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1E3A6E;--blue:#2B5BA8;--blue-mid:#3A6FC5;--blue-light:#5B8DD9;
+    --blue-pale:#D6E4F7;--blue-bg:#EEF4FC;
+    --white:#fff;--off-white:#F5F8FE;
+    --text-dark:#1a2a4a;--text-mid:#3a5080;--text-light:#7a9ac0;
+    --yellow:#F5C842;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Noto Sans JP','DM Sans',sans-serif;background:var(--off-white);color:var(--text-dark);min-height:100vh;display:flex;flex-direction:column;}
+
+  /* NAV */
+  .lang-bar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--blue-pale);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;}
+  .logo-nav{font-family:'Comfortaa',cursive;font-weight:700;font-size:1.4rem;text-decoration:none;}
+  .logo-nav .uni{background:linear-gradient(90deg,#6ecfa0,#f5c842);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .logo-nav .book{color:var(--navy);-webkit-text-fill-color:var(--navy);}
+  .nav-right{display:flex;align-items:center;gap:14px;}
+  .back-btn{color:var(--text-mid);font-size:0.85rem;text-decoration:none;font-weight:500;transition:color 0.2s;}
+  .back-btn:hover{color:var(--navy);}
+  .lang-toggle{display:flex;gap:4px;background:var(--blue-bg);border-radius:20px;padding:3px;}
+  .lang-btn{border:none;cursor:pointer;border-radius:16px;padding:5px 14px;font-size:0.8rem;font-weight:600;transition:all 0.2s;background:transparent;color:var(--text-mid);}
+  .lang-btn.active{background:var(--navy);color:white;}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--navy),var(--blue));padding:100px 40px 48px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E");}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.2);font-size:0.72rem;font-weight:800;padding:5px 16px;border-radius:20px;margin-bottom:16px;letter-spacing:0.1em;text-transform:uppercase;position:relative;z-index:1;}
+  .hero-title{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;color:white;margin-bottom:10px;position:relative;z-index:1;}
+  .hero-sub{font-size:0.9rem;color:rgba(255,255,255,0.65);position:relative;z-index:1;}
+
+  /* MAIN */
+  main{flex:1;max-width:820px;margin:0 auto;padding:40px 40px 80px;width:100%;}
+  .section-tabs{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap;}
+  .section-tab{padding:10px 24px;border-radius:24px;border:2px solid var(--blue-pale);background:white;font-size:0.88rem;font-weight:700;cursor:pointer;font-family:inherit;color:var(--text-mid);transition:all 0.2s;text-decoration:none;display:inline-block;}
+  .section-tab:hover{border-color:var(--blue-mid);color:var(--navy);}
+
+  .doc-block{background:white;border-radius:24px;border:1px solid var(--blue-pale);overflow:hidden;margin-bottom:24px;box-shadow:0 4px 24px rgba(30,58,110,0.07);}
+  .doc-header{padding:24px 28px;background:linear-gradient(135deg,var(--navy),var(--blue-mid));display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
+  .doc-header:hover{opacity:0.95;}
+  .doc-header-left{display:flex;align-items:center;gap:14px;}
+  .doc-header-icon{width:44px;height:44px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+  .doc-header-en{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:3px;}
+  .doc-header-title{font-size:1.2rem;font-weight:700;color:white;}
+  .doc-header-date{font-size:0.75rem;color:rgba(255,255,255,0.55);margin-top:3px;}
+  .doc-chevron{color:white;font-size:1.2rem;transition:transform 0.3s;flex-shrink:0;}
+  .doc-chevron.open{transform:rotate(180deg);}
+  .doc-body{display:none;padding:0;}
+  .doc-body.open{display:block;}
+
+  .chapter{border-bottom:1px solid var(--blue-pale);}
+  .chapter:last-child{border-bottom:none;}
+  .chapter-header{padding:16px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:var(--off-white);transition:background 0.2s;user-select:none;}
+  .chapter-header:hover{background:var(--blue-bg);}
+  .chapter-title{font-size:0.95rem;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:10px;}
+  .chapter-badge{background:var(--blue-mid);color:white;font-size:0.65rem;font-weight:800;padding:2px 9px;border-radius:10px;letter-spacing:0.04em;}
+  .chapter-chevron{color:var(--text-light);font-size:0.9rem;transition:transform 0.25s;}
+  .chapter-chevron.open{transform:rotate(180deg);}
+  .chapter-body{display:none;padding:20px 28px;background:white;}
+  .chapter-body.open{display:block;}
+
+  .article{margin-bottom:20px;}
+  .article:last-child{margin-bottom:0;}
+  .article-title{font-size:0.88rem;font-weight:700;color:var(--navy);margin-bottom:8px;padding-bottom:5px;border-bottom:1px dashed var(--blue-pale);}
+  .article-text{font-size:0.84rem;color:var(--text-mid);line-height:1.85;font-weight:300;}
+  .article-text ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:8px;}
+  .article-text ul li{padding-left:16px;position:relative;}
+  .article-text ul li::before{content:'・';position:absolute;left:0;color:var(--blue-mid);}
+  .article-text p{margin-bottom:6px;}
+  .article-text strong{font-weight:700;color:var(--navy);display:block;margin:10px 0 5px;}
+  .article-text .note{font-size:0.78rem;color:var(--text-light);margin-top:8px;}
+  .sub-list{margin-top:6px;margin-left:14px;}
+  .sub-list li::before{content:'-' !important;color:var(--text-light) !important;}
+
+  .cta-box{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:20px;padding:28px 32px;text-align:center;margin-top:32px;}
+  .cta-box-note{font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:20px;}
+  .cta-box-note strong{color:white;font-weight:700;}
+  .cta-btn{display:inline-block;text-decoration:none;background:white;color:var(--navy);padding:13px 32px;border-radius:26px;font-size:0.95rem;font-weight:700;font-family:inherit;border:none;cursor:pointer;transition:all 0.25s;box-shadow:0 4px 18px rgba(0,0,0,0.15);}
+  .cta-btn:hover{background:var(--yellow);transform:translateY(-2px);}
+  .cta-btn-sub{display:block;margin-top:12px;font-size:0.76rem;color:rgba(255,255,255,0.55);}
+
+  footer{background:#0d1d40;padding:36px 40px;text-align:center;color:rgba(255,255,255,0.38);font-size:0.8rem;}
+  .foot-logo{font-family:'Comfortaa',cursive;font-size:1.2rem;font-weight:700;margin-bottom:8px;}
+  .foot-logo .uni{background:linear-gradient(90deg,#6ecfa0,#f5c842);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .foot-logo .book{color:white;-webkit-text-fill-color:white;}
+
+  @media(max-width:640px){
+    .lang-bar{padding:0 16px;}
+    .hero{padding:88px 20px 36px;}
+    main{padding:28px 16px 60px;}
+    .doc-header{padding:18px 20px;}
+    .chapter-header{padding:14px 20px;}
+    .chapter-body{padding:16px 20px;}
+    .cta-box{padding:22px 20px;}
+    .section-tabs{gap:8px;}
+    .section-tab{padding:8px 16px;font-size:0.82rem;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="lang-bar">
+  <a href="#" class="logo-nav"><span class="uni">Uni</span><span class="book">book</span></a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="ja">JP</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge" data-ja="法的文書" data-en="Legal Documents">法的文書</div>
+  <h1 class="hero-title" data-ja="利用規約・プライバシーポリシー" data-en="Terms of Service & Privacy Policy">利用規約・プライバシーポリシー</h1>
+  <p class="hero-sub" data-ja="制定日：2026年6月1日" data-en="Enacted: June 1, 2026">制定日：2026年6月1日</p>
+</div>
+
+<main>
+  <div class="section-tabs">
+    <a href="#terms" class="section-tab" data-ja="📋 利用規約" data-en="📋 Terms of Service">📋 利用規約</a>
+    <a href="#privacy" class="section-tab" data-ja="🔒 プライバシーポリシー" data-en="🔒 Privacy Policy">🔒 プライバシーポリシー</a>
+  </div>
+
+  <!-- ===== 利用規約 ===== -->
+  <div class="doc-block" id="terms">
+    <div class="doc-header" onclick="toggleDoc(this)">
+      <div class="doc-header-left">
+        <div class="doc-header-icon">📋</div>
+        <div>
+          <div class="doc-header-en">Terms of Service</div>
+          <div class="doc-header-title" data-ja="利用規約" data-en="Terms of Service">利用規約</div>
+          <div class="doc-header-date" data-ja="制定日：2026年6月1日／運営者：Unication" data-en="Enacted: June 1, 2026 / Operator: Unication">制定日：2026年6月1日／運営者：Unication</div>
+        </div>
+      </div>
+      <span class="doc-chevron open">▲</span>
+    </div>
+    <div class="doc-body open">
+      <div class="chapter">
+        <div class="chapter-body open" style="display:block;">
+          <div class="article">
+            <div class="article-text" data-ja="本利用規約（以下「本規約」といいます）は、Unibook（以下「本サービス」といいます）の利用条件を定めるものです。本サービスを利用する利用者（以下「ユーザー」といいます）は、本規約に同意のうえで本サービスを利用するものとします。" data-en="These Terms of Service (hereinafter 'Terms') define the conditions for using Unibook (hereinafter 'Service'). Users who use the Service do so upon agreeing to these Terms.">本利用規約（以下「本規約」といいます）は、Unibook（以下「本サービス」といいます）の利用条件を定めるものです。本サービスを利用する利用者（以下「ユーザー」といいます）は、本規約に同意のうえで本サービスを利用するものとします。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第1条（適用）" data-en="Article 1 (Application)">第1条（適用）</div>
+            <div class="article-text" data-ja="本規約は、ユーザーと本サービスの運営者（以下「運営者」といいます）との間の、本サービスの利用に関わる一切の関係に適用されます。" data-en="These Terms apply to all relationships between users and the operator of the Service (hereinafter 'Operator') concerning the use of the Service.">本規約は、ユーザーと本サービスの運営者（以下「運営者」といいます）との間の、本サービスの利用に関わる一切の関係に適用されます。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第2条（利用登録）" data-en="Article 2 (Registration)">第2条（利用登録）</div>
+            <div class="article-text">
+              <ul>
+                <li data-ja="本サービスの利用を希望する者は、本規約に同意し、運営者の定める方法によって利用登録を申請し、運営者がこれを承認することによって、利用登録が完了するものとします。" data-en="Those wishing to use the Service apply for registration by the method specified by the Operator after agreeing to these Terms; registration is complete upon the Operator's approval.">本サービスの利用を希望する者は、本規約に同意し、運営者の定める方法によって利用登録を申請し、運営者がこれを承認することによって、利用登録が完了するものとします。</li>
+                <li data-ja="運営者は、利用登録の申請者に次の事由があると判断した場合、利用登録の申請を承認しないことがあります。" data-en="The Operator may decline a registration application if it determines any of the following apply:">運営者は、利用登録の申請者に次の事由があると判断した場合、利用登録の申請を承認しないことがあります。</li>
+              </ul>
+              <ul class="sub-list">
+                <li data-ja="虚偽の事項を届け出た場合" data-en="When false information is submitted">虚偽の事項を届け出た場合</li>
+                <li data-ja="本規約に違反したことがある者からの申請である場合" data-en="When the application is from someone who has violated these Terms">本規約に違反したことがある者からの申請である場合</li>
+                <li data-ja="その他、運営者が利用登録を相当でないと判断した場合" data-en="Other cases the Operator deems registration inappropriate">その他、運営者が利用登録を相当でないと判断した場合</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第3条（アカウントの管理）" data-en="Article 3 (Account Management)">第3条（アカウントの管理）</div>
+            <div class="article-text">
+              <ul>
+                <li data-ja="ユーザーは、自己の責任において、本サービスのアカウント情報（メールアドレス・パスワード等）を適切に管理するものとします。" data-en="Users shall appropriately manage their account information (email, password, etc.) at their own responsibility.">ユーザーは、自己の責任において、本サービスのアカウント情報（メールアドレス・パスワード等）を適切に管理するものとします。</li>
+                <li data-ja="ユーザーは、アカウント情報を第三者に利用させ、または貸与・譲渡・売買等をしてはならないものとします。" data-en="Users must not allow third parties to use, lend, transfer, or sell their account information.">ユーザーは、アカウント情報を第三者に利用させ、または貸与・譲渡・売買等をしてはならないものとします。</li>
+                <li data-ja="アカウント情報の管理不十分により生じた損害の責任は、ユーザーが負うものとします。" data-en="Users bear responsibility for damages arising from inadequate account management.">アカウント情報の管理不十分により生じた損害の責任は、ユーザーが負うものとします。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第4条（利用料金）" data-en="Article 4 (Fees)">第4条（利用料金）</div>
+            <div class="article-text" data-ja="本サービスは無料で提供されます。本サービス内でユーザーが利用できる機能は、Unicationでの受講コースにより異なります。" data-en="The Service is provided free of charge. The features available to users within the Service vary depending on the course they take at Unication.">本サービスは無料で提供されます。本サービス内でユーザーが利用できる機能は、Unicationでの受講コースにより異なります。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第5条（禁止事項）" data-en="Article 5 (Prohibited Activities)">第5条（禁止事項）</div>
+            <div class="article-text">
+              <p data-ja="ユーザーは、本サービスの利用にあたり、次の行為をしてはならないものとします。" data-en="Users must not engage in the following activities when using the Service:">ユーザーは、本サービスの利用にあたり、次の行為をしてはならないものとします。</p>
+              <ul>
+                <li data-ja="法令または公序良俗に違反する行為" data-en="Acts violating laws or public order and morals">法令または公序良俗に違反する行為</li>
+                <li data-ja="犯罪行為に関連する行為" data-en="Acts related to criminal activity">犯罪行為に関連する行為</li>
+                <li data-ja="運営者や他のユーザー、第三者の権利・利益を侵害する行為" data-en="Acts infringing on the rights/interests of the Operator, other users, or third parties">運営者や他のユーザー、第三者の権利・利益を侵害する行為</li>
+                <li data-ja="他のユーザーになりすます行為、不正にアカウントを利用する行為" data-en="Impersonating other users or using accounts fraudulently">他のユーザーになりすます行為、不正にアカウントを利用する行為</li>
+                <li data-ja="本サービスのサーバーやネットワークの機能を破壊・妨害する行為" data-en="Destroying or interfering with the Service's servers or network functions">本サービスのサーバーやネットワークの機能を破壊・妨害する行為</li>
+                <li data-ja="本サービスの運営を妨害するおそれのある行為" data-en="Acts that may interfere with the operation of the Service">本サービスの運営を妨害するおそれのある行為</li>
+                <li data-ja="不正アクセス、またはこれを試みる行為" data-en="Unauthorized access or attempts thereof">不正アクセス、またはこれを試みる行為</li>
+                <li data-ja="その他、運営者が不適切と判断する行為" data-en="Other acts the Operator deems inappropriate">その他、運営者が不適切と判断する行為</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第6条（本サービスの提供の停止等）" data-en="Article 6 (Suspension of Service)">第6条（本サービスの提供の停止等）</div>
+            <div class="article-text">
+              <p data-ja="運営者は、次のいずれかの事由があると判断した場合、ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。" data-en="The Operator may suspend or interrupt all or part of the Service without prior notice if it determines any of the following apply:">運営者は、次のいずれかの事由があると判断した場合、ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。</p>
+              <ul>
+                <li data-ja="本サービスのシステムの保守点検または更新を行う場合" data-en="When performing system maintenance or updates">本サービスのシステムの保守点検または更新を行う場合</li>
+                <li data-ja="地震・落雷・火災・停電・天災などの不可抗力により提供が困難となった場合" data-en="When provision becomes difficult due to force majeure such as earthquakes, lightning, fire, power outages, or natural disasters">地震・落雷・火災・停電・天災などの不可抗力により提供が困難となった場合</li>
+                <li data-ja="コンピュータまたは通信回線等が事故により停止した場合" data-en="When computers or communication lines stop due to an accident">コンピュータまたは通信回線等が事故により停止した場合</li>
+                <li data-ja="その他、運営者が提供が困難と判断した場合" data-en="Other cases the Operator deems provision difficult">その他、運営者が提供が困難と判断した場合</li>
+              </ul>
+              <p style="margin-top:8px;" data-ja="運営者は、本サービスの提供の停止または中断により、ユーザーまたは第三者が被った不利益・損害について、一切の責任を負わないものとします。" data-en="The Operator bears no responsibility for any disadvantage or damage suffered by users or third parties due to the suspension or interruption of the Service.">運営者は、本サービスの提供の停止または中断により、ユーザーまたは第三者が被った不利益・損害について、一切の責任を負わないものとします。</p>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第7条（利用制限および登録抹消）" data-en="Article 7 (Usage Restrictions & Deregistration)">第7条（利用制限および登録抹消）</div>
+            <div class="article-text" data-ja="運営者は、ユーザーが本規約のいずれかに違反した場合、事前の通知なく、ユーザーに対して本サービスの全部もしくは一部の利用を制限し、またはユーザーとしての登録を抹消することができるものとします。" data-en="If a user violates any of these Terms, the Operator may restrict all or part of the user's use of the Service or delete their registration without prior notice.">運営者は、ユーザーが本規約のいずれかに違反した場合、事前の通知なく、ユーザーに対して本サービスの全部もしくは一部の利用を制限し、またはユーザーとしての登録を抹消することができるものとします。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第8条（免責事項）" data-en="Article 8 (Disclaimer)">第8条（免責事項）</div>
+            <div class="article-text">
+              <ul>
+                <li data-ja="運営者は、本サービスに事実上または法律上の瑕疵（安全性・信頼性・正確性・完全性・有効性・特定目的への適合性等を含みます）がないことを明示的にも黙示的にも保証するものではありません。" data-en="The Operator does not expressly or implicitly guarantee that the Service is free from defects in fact or law (including safety, reliability, accuracy, completeness, effectiveness, and fitness for a particular purpose).">運営者は、本サービスに事実上または法律上の瑕疵（安全性・信頼性・正確性・完全性・有効性・特定目的への適合性等を含みます）がないことを明示的にも黙示的にも保証するものではありません。</li>
+                <li data-ja="運営者は、本サービスに起因してユーザーに生じたあらゆる損害について、運営者の故意または重過失による場合を除き、一切の責任を負わないものとします。" data-en="The Operator bears no responsibility for any damages to users arising from the Service, except in cases of the Operator's intent or gross negligence.">運営者は、本サービスに起因してユーザーに生じたあらゆる損害について、運営者の故意または重過失による場合を除き、一切の責任を負わないものとします。</li>
+                <li data-ja="運営者は、ユーザー間またはユーザーと第三者との間で生じた取引・連絡・紛争等について、一切責任を負わないものとします。" data-en="The Operator bears no responsibility for transactions, communications, or disputes between users or between users and third parties.">運営者は、ユーザー間またはユーザーと第三者との間で生じた取引・連絡・紛争等について、一切責任を負わないものとします。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第9条（サービス内容の変更等）" data-en="Article 9 (Changes to Service)">第9条（サービス内容の変更等）</div>
+            <div class="article-text" data-ja="運営者は、ユーザーへの事前の通知をもって、本サービスの内容を変更し、または本サービスの提供を中止することができるものとし、これによってユーザーに生じた損害について一切の責任を負いません。" data-en="The Operator may change the content of the Service or discontinue its provision with prior notice to users, and bears no responsibility for any damages to users resulting from this.">運営者は、ユーザーへの事前の通知をもって、本サービスの内容を変更し、または本サービスの提供を中止することができるものとし、これによってユーザーに生じた損害について一切の責任を負いません。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第10条（利用規約の変更）" data-en="Article 10 (Changes to Terms)">第10条（利用規約の変更）</div>
+            <div class="article-text" data-ja="運営者は、必要と判断した場合には、ユーザーに通知することなくいつでも本規約を変更することができるものとします。変更後の本規約は、本サービス上に掲示された時点から効力を生じるものとします。" data-en="The Operator may change these Terms at any time without notice when deemed necessary. The revised Terms take effect when posted on the Service.">運営者は、必要と判断した場合には、ユーザーに通知することなくいつでも本規約を変更することができるものとします。変更後の本規約は、本サービス上に掲示された時点から効力を生じるものとします。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第11条（個人情報の取扱い）" data-en="Article 11 (Handling of Personal Information)">第11条（個人情報の取扱い）</div>
+            <div class="article-text" data-ja="運営者は、本サービスの利用によって取得する個人情報を、別途定める「プライバシーポリシー」に従って適切に取り扱います。" data-en="The Operator appropriately handles personal information obtained through use of the Service in accordance with the separately established 'Privacy Policy'.">運営者は、本サービスの利用によって取得する個人情報を、別途定める「プライバシーポリシー」に従って適切に取り扱います。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第12条（準拠法・裁判管轄）" data-en="Article 12 (Governing Law & Jurisdiction)">第12条（準拠法・裁判管轄）</div>
+            <div class="article-text">
+              <ul>
+                <li data-ja="本規約の解釈にあたっては、日本法を準拠法とします。" data-en="Japanese law shall govern the interpretation of these Terms.">本規約の解釈にあたっては、日本法を準拠法とします。</li>
+                <li data-ja="本サービスに関して紛争が生じた場合には、運営者の所在地を管轄する裁判所を専属的合意管轄とします。" data-en="In the event of a dispute regarding the Service, the court having jurisdiction over the Operator's location shall be the exclusive agreed jurisdiction.">本サービスに関して紛争が生じた場合には、運営者の所在地を管轄する裁判所を専属的合意管轄とします。</li>
+              </ul>
+              <p class="note" data-ja="制定日：2026年6月1日／運営者名：Unication／連絡先：unication.edu@gmail.com" data-en="Enacted: June 1, 2026 / Operator: Unication / Contact: unication.edu@gmail.com">制定日：2026年6月1日／運営者名：Unication／連絡先：unication.edu@gmail.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== プライバシーポリシー ===== -->
+  <div class="doc-block" id="privacy">
+    <div class="doc-header" onclick="toggleDoc(this)" style="background:linear-gradient(135deg,#1a5c3a,var(--blue-mid));">
+      <div class="doc-header-left">
+        <div class="doc-header-icon">🔒</div>
+        <div>
+          <div class="doc-header-en">Privacy Policy</div>
+          <div class="doc-header-title" data-ja="プライバシーポリシー" data-en="Privacy Policy">プライバシーポリシー</div>
+          <div class="doc-header-date" data-ja="制定日：2026年6月1日" data-en="Enacted: June 1, 2026">制定日：2026年6月1日</div>
+        </div>
+      </div>
+      <span class="doc-chevron">▲</span>
+    </div>
+    <div class="doc-body open">
+      <div class="chapter">
+        <div class="chapter-body open" style="display:block;">
+          <div class="article">
+            <div class="article-text" data-ja="本プライバシーポリシー（以下「本ポリシー」といいます）は、Unibook（以下「本サービス」といいます）における、利用者（以下「ユーザー」といいます）の個人情報の取り扱いについて定めるものです。" data-en="This Privacy Policy (hereinafter 'Policy') defines the handling of users' (hereinafter 'Users') personal information in Unibook (hereinafter 'Service').">本プライバシーポリシー（以下「本ポリシー」といいます）は、Unibook（以下「本サービス」といいます）における、利用者（以下「ユーザー」といいます）の個人情報の取り扱いについて定めるものです。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第1条（取得する情報）" data-en="Article 1 (Information Collected)">第1条（取得する情報）</div>
+            <div class="article-text">
+              <p data-ja="本サービスは、サービスの提供にあたり、次の情報を取得します。" data-en="The Service collects the following information to provide its services:">本サービスは、サービスの提供にあたり、次の情報を取得します。</p>
+              <ul>
+                <li data-ja="アカウント情報：メールアドレス、ニックネーム（表示名）、アカウント種別（学習者・講師・管理者）" data-en="Account information: email address, nickname (display name), account type (learner / instructor / administrator)">アカウント情報：メールアドレス、ニックネーム（表示名）、アカウント種別（学習者・講師・管理者）</li>
+                <li data-ja="学習・予約に関する情報：受講レベル、コース、予約・受講状況、イベント参加状況など、サービス利用に伴って生成される情報" data-en="Learning/booking information: level, course, booking/attendance status, event participation, and other information generated through use">学習・予約に関する情報：受講レベル、コース、予約・受講状況、イベント参加状況など、サービス利用に伴って生成される情報</li>
+                <li data-ja="通知に関する情報：プッシュ通知を配信するための端末トークン（通知を許可した場合）、通知設定" data-en="Notification information: device token for push notifications (if permitted), notification settings">通知に関する情報：プッシュ通知を配信するための端末トークン（通知を許可した場合）、通知設定</li>
+                <li data-ja="認証情報：パスワード（認証基盤において安全に管理され、運営者がそのまま閲覧できる形では保持されません）" data-en="Authentication information: password (securely managed by the authentication system; not retained in a form the Operator can directly view)">認証情報：パスワード（認証基盤において安全に管理され、運営者がそのまま閲覧できる形では保持されません）</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第2条（情報を取得する方法）" data-en="Article 2 (How Information Is Collected)">第2条（情報を取得する方法）</div>
+            <div class="article-text" data-ja="本サービスは、ユーザーが利用登録を行う際、またはサービスを利用する際に、ユーザー自身の入力や操作を通じて情報を取得します。プッシュ通知用の端末トークンは、ユーザーが通知の許可を行った場合にのみ取得されます。" data-en="The Service collects information through user input and operations when users register or use the Service. Device tokens for push notifications are collected only when the user permits notifications.">本サービスは、ユーザーが利用登録を行う際、またはサービスを利用する際に、ユーザー自身の入力や操作を通じて情報を取得します。プッシュ通知用の端末トークンは、ユーザーが通知の許可を行った場合にのみ取得されます。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第3条（利用目的）" data-en="Article 3 (Purpose of Use)">第3条（利用目的）</div>
+            <div class="article-text">
+              <p data-ja="取得した情報は、次の目的のために利用します。" data-en="Collected information is used for the following purposes:">取得した情報は、次の目的のために利用します。</p>
+              <ul>
+                <li data-ja="本サービスの提供・運営のため（ログイン認証、予約・受講管理、コース管理など）" data-en="Providing and operating the Service (login authentication, booking/attendance management, course management, etc.)">本サービスの提供・運営のため（ログイン認証、予約・受講管理、コース管理など）</li>
+                <li data-ja="ユーザーへの通知・連絡のため（予約の承認・却下、リマインダー、お知らせ等のアプリ内通知およびプッシュ通知）" data-en="Notifying and contacting users (in-app and push notifications such as booking approval/rejection, reminders, and announcements)">ユーザーへの通知・連絡のため（予約の承認・却下、リマインダー、お知らせ等のアプリ内通知およびプッシュ通知）</li>
+                <li data-ja="本サービスの維持・改善、不具合対応のため" data-en="Maintaining and improving the Service and addressing issues">本サービスの維持・改善、不具合対応のため</li>
+                <li data-ja="利用規約に違反する行為への対応のため" data-en="Responding to acts that violate the Terms of Service">利用規約に違反する行為への対応のため</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第4条（情報の管理と保管）" data-en="Article 4 (Management & Storage)">第4条（情報の管理と保管）</div>
+            <div class="article-text">
+              <p data-ja="本サービスは、取得した情報を、Googleが提供するクラウドサービス（Firebase / Google Cloud Platform）上に保管します。データは適切なアクセス制御（セキュリティルール）のもとで管理されます。" data-en="The Service stores collected information on Google's cloud services (Firebase / Google Cloud Platform). Data is managed under appropriate access controls (security rules).">本サービスは、取得した情報を、Googleが提供するクラウドサービス（Firebase / Google Cloud Platform）上に保管します。データは適切なアクセス制御（セキュリティルール）のもとで管理されます。</p>
+              <p style="margin-top:6px;" data-ja="運営者は、情報の漏えい、滅失またはき損の防止その他の安全管理のために、必要かつ適切な措置を講じます。" data-en="The Operator takes necessary and appropriate measures for security management, including preventing leakage, loss, or damage of information.">運営者は、情報の漏えい、滅失またはき損の防止その他の安全管理のために、必要かつ適切な措置を講じます。</p>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第5条（第三者提供）" data-en="Article 5 (Third-Party Provision)">第5条（第三者提供）</div>
+            <div class="article-text">
+              <p data-ja="運営者は、次のいずれかに該当する場合を除き、あらかじめユーザーの同意を得ることなく、個人情報を第三者に提供しません。" data-en="The Operator does not provide personal information to third parties without prior user consent, except in the following cases:">運営者は、次のいずれかに該当する場合を除き、あらかじめユーザーの同意を得ることなく、個人情報を第三者に提供しません。</p>
+              <ul>
+                <li data-ja="法令に基づく場合" data-en="When based on laws and regulations">法令に基づく場合</li>
+                <li data-ja="人の生命、身体または財産の保護のために必要であり、本人の同意を得ることが困難な場合" data-en="When necessary to protect a person's life, body, or property and obtaining consent is difficult">人の生命、身体または財産の保護のために必要であり、本人の同意を得ることが困難な場合</li>
+                <li data-ja="本サービスの提供に必要な範囲で、業務委託先（クラウドサービス提供者等）に取り扱いを委託する場合" data-en="When entrusting handling to subcontractors (e.g., cloud service providers) to the extent necessary to provide the Service">本サービスの提供に必要な範囲で、業務委託先（クラウドサービス提供者等）に取り扱いを委託する場合</li>
+              </ul>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第6条（外部サービスの利用）" data-en="Article 6 (Use of External Services)">第6条（外部サービスの利用）</div>
+            <div class="article-text">
+              <p data-ja="本サービスは、サービス提供のために以下の外部サービスを利用しています。これらのサービスにおける情報の取り扱いについては、各提供者の定めるプライバシーポリシーが適用されます。" data-en="The Service uses the following external services to provide its functions. The handling of information in these services is subject to each provider's privacy policy.">本サービスは、サービス提供のために以下の外部サービスを利用しています。これらのサービスにおける情報の取り扱いについては、各提供者の定めるプライバシーポリシーが適用されます。</p>
+              <ul>
+                <li data-ja="Firebase / Google Cloud Platform（Google LLC）：データ保存、ユーザー認証、プッシュ通知の配信" data-en="Firebase / Google Cloud Platform (Google LLC): data storage, user authentication, push notification delivery">Firebase / Google Cloud Platform（Google LLC）：データ保存、ユーザー認証、プッシュ通知の配信</li>
+              </ul>
+              <p class="note" data-ja="※ Googleのプライバシーポリシー：https://policies.google.com/privacy" data-en="※ Google Privacy Policy: https://policies.google.com/privacy">※ Googleのプライバシーポリシー：<a href="https://policies.google.com/privacy" target="_blank" style="color:var(--blue-mid);">https://policies.google.com/privacy</a></p>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第7条（個人情報の開示・訂正・削除）" data-en="Article 7 (Disclosure, Correction & Deletion)">第7条（個人情報の開示・訂正・削除）</div>
+            <div class="article-text">
+              <p data-ja="ユーザーは、運営者に対して、自己の個人情報の開示・訂正・利用停止・削除を求めることができます。" data-en="Users may request the Operator to disclose, correct, suspend use of, or delete their personal information.">ユーザーは、運営者に対して、自己の個人情報の開示・訂正・利用停止・削除を求めることができます。</p>
+              <p style="margin-top:6px;" data-ja="ユーザーは、本サービス上で自己のアカウント情報の一部（ニックネーム、通知設定等）を変更できます。アカウント自体の削除を希望する場合は、運営者の連絡先までお問い合わせください。" data-en="Users can change part of their account information (nickname, notification settings, etc.) within the Service. To delete the account itself, please contact the Operator.">ユーザーは、本サービス上で自己のアカウント情報の一部（ニックネーム、通知設定等）を変更できます。アカウント自体の削除を希望する場合は、運営者の連絡先までお問い合わせください。</p>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第8条（プライバシーポリシーの変更）" data-en="Article 8 (Changes to Policy)">第8条（プライバシーポリシーの変更）</div>
+            <div class="article-text" data-ja="本ポリシーの内容は、法令その他の本ポリシーに別段の定めのある事項を除いて、ユーザーに通知することなく変更することができるものとします。変更後のプライバシーポリシーは、本サービス上に掲示された時点から効力を生じるものとします。" data-en="The content of this Policy may be changed without notice to users, except for matters otherwise stipulated by law or this Policy. The revised Privacy Policy takes effect when posted on the Service.">本ポリシーの内容は、法令その他の本ポリシーに別段の定めのある事項を除いて、ユーザーに通知することなく変更することができるものとします。変更後のプライバシーポリシーは、本サービス上に掲示された時点から効力を生じるものとします。</div>
+          </div>
+          <div class="article">
+            <div class="article-title" data-ja="第9条（お問い合わせ窓口）" data-en="Article 9 (Contact)">第9条（お問い合わせ窓口）</div>
+            <div class="article-text" data-ja="本ポリシーに関するお問い合わせは、下記の窓口までお願いいたします。運営者名：Unication／お問い合わせ用メールアドレス：unication.edu@gmail.com" data-en="For inquiries regarding this Policy, please contact: Operator: Unication / Email: unication.edu@gmail.com">本ポリシーに関するお問い合わせは、下記の窓口までお願いいたします。運営者名：Unication／お問い合わせ用メールアドレス：unication.edu@gmail.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <p class="cta-box-note">
+      <strong data-ja="【同意について】" data-en="【Regarding Agreement】">【同意について】</strong><br>
+      <span data-ja="利用登録した場合は、上記の利用規約・プライバシーポリシーに同意したことになります。下のボタンから登録へ進んでください。" data-en="By registering, you are deemed to have agreed to the Terms of Service and Privacy Policy above. Please proceed to registration via the button below.">利用登録した場合は、上記の利用規約・プライバシーポリシーに同意したことになります。下のボタンから登録へ進んでください。</span>
+    </p>
+    <a href="https://unibook-5d6c2.web.app/" target="_blank" class="cta-btn" data-ja="登録へ進む →" data-en="Proceed to Register →">登録へ進む →</a>
+    <span class="cta-btn-sub" data-ja="※ ボタンを押すとUnibookの登録ページに移動します" data-en="※ Clicking the button takes you to the Unibook registration page">※ ボタンを押すとUnibookの登録ページに移動します</span>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-logo"><span class="uni">Uni</span><span class="book">book</span></div>
+  <p data-ja="© 2026 Unication. All rights reserved." data-en="© 2026 Unication. All rights reserved.">© 2026 Unication. All rights reserved.</p>
+</footer>
+
+<script>
+let currentLang='ja';
+function applyLang(lang){
+  currentLang=lang;
+  document.querySelectorAll('[data-ja]').forEach(el=>{
+    const t=el.getAttribute('data-'+lang);
+    if(t) el.innerHTML=t;
+  });
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.documentElement.lang=lang==='ja'?'ja':'en';
+}
+document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
+
+function toggleDoc(header){
+  const body=header.nextElementSibling;
+  const chevron=header.querySelector('.doc-chevron');
+  const isOpen=body.classList.toggle('open');
+  chevron.classList.toggle('open',isOpen);
+}
+function toggleChapter(header){
+  const body=header.nextElementSibling;
+  const chevron=header.querySelector('.chapter-chevron');
+  const isOpen=body.classList.toggle('open');
+  chevron.classList.toggle('open',isOpen);
+}
+document.querySelectorAll('.section-tab').forEach(tab=>{
+  tab.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=document.querySelector(tab.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
