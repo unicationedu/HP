@@ -148,6 +148,17 @@
   .test-notice-icon { font-size:1.8rem; flex-shrink:0; }
   .test-notice-text p { font-size:0.86rem; color:#6b4f00; line-height:1.85; font-weight:400; }
   @media(max-width:640px){ .test-notice { flex-direction:column; gap:10px; padding:20px; } }
+  .course-target { margin-top:14px; padding:10px 14px; background:var(--blue-bg); border-radius:12px; font-size:0.78rem; color:var(--text-mid); line-height:1.7; border-left:3px solid var(--blue-mid); text-align:left; }
+  .period-section { background:linear-gradient(135deg,#1a5c3a,var(--blue)); padding:64px 40px; }
+  .period-inner { max-width:760px; margin:0 auto; text-align:center; }
+  .period-label { font-size:0.72rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:10px; }
+  .period-title { font-size:clamp(1.5rem,3vw,2.2rem); font-weight:700; color:white; margin-bottom:32px; }
+  .period-cards { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:24px; }
+  .period-card { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:18px; padding:24px 36px; min-width:240px; }
+  .period-term { font-size:0.8rem; font-weight:800; color:var(--yellow); letter-spacing:0.06em; margin-bottom:8px; }
+  .period-date { font-size:1.3rem; font-weight:700; color:white; }
+  .period-note { font-size:0.82rem; color:rgba(255,255,255,0.7); line-height:1.7; }
+  @media(max-width:640px){ .period-section{padding:48px 20px;} .period-cards{flex-direction:column;} }
   .course-card {
     border-radius:18px; padding:28px 22px; position:relative; overflow:hidden;
     border:1px solid var(--blue-pale); background:var(--off-white);
@@ -356,7 +367,7 @@
       </h1>
       <p class="hero-sub" data-ja="世界でつながる、チャット型学習サポート。<br>いつでも・どこでも・だれでも、国境を超えた学びを。" data-en="Chat-based learning support, connected across the world.<br>Anytime, anywhere, for anyone — learning beyond borders.">世界でつながる、チャット型学習サポート。<br>いつでも・どこでも・だれでも、国境を超えた学びを。</p>
       <div class="hero-buttons">
-        <a href="terms.html" class="btn-primary" data-ja="テスト運営に参加する →" data-en="Join the Test Program →">テスト運営に参加する →</a>
+        <a href="https://forms.gle/FQmsZTbkryYs4L6m6" target="_blank" class="btn-primary" data-ja="テスト運営に参加する →" data-en="Join the Test Program →">テスト運営に参加する →</a>
         <a href="grammar.html" class="btn-japanese" data-ja="日本語を勉強する 🇯🇵" data-en="Study Japanese 🇯🇵">日本語を勉強する 🇯🇵</a>
       </div>
       <div class="hero-stats">
@@ -435,18 +446,21 @@
         <span class="course-icon">🗾</span>
         <h3 data-ja="日本語会話（チャット・オンラインを予定）" data-en="Japanese Conversation (Chat & Online)">日本語会話<br>（チャット・オンラインを予定）</h3>
         <p data-ja="基本はチャットで日本語を活用して会話をします。テスト運営期間中に1度のみ、最大30分のオンライン指導を受講可能です。" data-en="Mainly chat-based conversation practice in Japanese. During the test period, you can receive one online lesson of up to 30 minutes.">基本はチャットで日本語を活用して会話をします。テスト運営期間中に1度のみ、最大30分のオンライン指導を受講可能です。</p>
+        <div class="course-target" data-ja="🎯 対象：日本以外の国にルーツを持ち、日本の小中学校に通われている方とそのご家族／日本語を学びたい方" data-en="🎯 For: Those with roots outside Japan attending Japanese elementary/junior high schools and their families / anyone wanting to learn Japanese">🎯 対象：日本以外の国にルーツを持ち、日本の小中学校に通われている方とそのご家族／日本語を学びたい方</div>
       </div>
       <div class="course-card">
         <div class="course-tag" data-ja="無料" data-en="Free">無料</div>
         <span class="course-icon">✍️</span>
         <h3 data-ja="日本語平仮名学習コース（6日間を予定）" data-en="Japanese Hiragana Course (6 days)">日本語平仮名学習コース<br>（6日間を予定）</h3>
         <p data-ja="毎日朝9時（日本時間）に教材を配信。教材や日本語学習サイト、チャットを用いて勉強しましょう。テスト運営期間中に1度のみ、最大30分のオンライン指導を受講可能です。" data-en="Materials delivered daily at 9 AM (JST). Study using materials, Japanese learning sites, and chat. During the test period, you can receive one online lesson of up to 30 minutes.">毎日朝9時（日本時間）に教材を配信。教材や日本語学習サイト、チャットを用いて勉強しましょう。テスト運営期間中に1度のみ、最大30分のオンライン指導を受講可能です。</p>
+        <div class="course-target" data-ja="🎯 対象：日本以外の国にルーツを持ち、日本の小中学校に通われている方とそのご家族／日本語を学びたい方" data-en="🎯 For: Those with roots outside Japan attending Japanese elementary/junior high schools and their families / anyone wanting to learn Japanese">🎯 対象：日本以外の国にルーツを持ち、日本の小中学校に通われている方とそのご家族／日本語を学びたい方</div>
       </div>
       <div class="course-card">
         <div class="course-tag" data-ja="無料" data-en="Free">無料</div>
         <span class="course-icon">📖</span>
         <h3 data-ja="教科学習支援（チャット・オンラインを予定）" data-en="Subject Learning Support (Chat & Online)">教科学習支援<br>（チャット・オンラインを予定）</h3>
         <p data-ja="基本はチャットから質問を受け付けます。テスト運営期間中に1度のみ、最大30分のオンライン指導を受講可能です。（対象は小中学生）" data-en="Mainly accepts questions via chat. During the test period, you can receive one online lesson of up to 30 minutes. (For elementary and junior high school students)">基本はチャットから質問を受け付けます。テスト運営期間中に1度のみ、最大30分のオンライン指導を受講可能です。（対象は小中学生）</p>
+        <div class="course-target" data-ja="🎯 対象：日本以外の国にルーツを持ち、日本の小中学校に通われている方／日本国内の小中学校に通われている方" data-en="🎯 For: Those with roots outside Japan attending Japanese elementary/junior high schools / those attending elementary/junior high schools in Japan">🎯 対象：日本以外の国にルーツを持ち、日本の小中学校に通われている方／日本国内の小中学校に通われている方</div>
       </div>
     <div class="test-notice reveal">
       <div class="test-notice-icon">📢</div>
@@ -455,6 +469,24 @@
         <p style="margin-top:10px;" data-ja="また、テスト運営期間中はご不便をおかけする可能性もございます。ぜひサービスを利用した率直なお声をお聞かせください。" data-en="Please note that there may be some inconvenience during the test period. We would greatly appreciate your honest feedback after using the service.">また、テスト運営期間中はご不便をおかけする可能性もございます。ぜひサービスを利用した率直なお声をお聞かせください。</p>
       </div>
     </div>
+  </div>
+</section>
+<!-- TEST PERIOD -->
+<section class="period-section">
+  <div class="period-inner">
+    <div class="period-label" data-ja="テスト運営期間" data-en="Test Period">テスト運営期間</div>
+    <h2 class="period-title" data-ja="開催スケジュール" data-en="Schedule">開催スケジュール</h2>
+    <div class="period-cards">
+      <div class="period-card">
+        <div class="period-term" data-ja="ターム 1" data-en="Term 1">ターム 1</div>
+        <div class="period-date" data-ja="7月1日 〜 7月10日" data-en="Jul 1 – Jul 10">7月1日 〜 7月10日</div>
+      </div>
+      <div class="period-card">
+        <div class="period-term" data-ja="ターム 2" data-en="Term 2">ターム 2</div>
+        <div class="period-date" data-ja="7月13日 〜 7月24日" data-en="Jul 13 – Jul 24">7月13日 〜 7月24日</div>
+      </div>
+    </div>
+    <p class="period-note" data-ja="※ 終了直前にいただいたメッセージ・ご質問への回答は難しい場合もございます。" data-en="※ We may be unable to respond to messages or questions received just before the end of a term.">※ 終了直前にいただいたメッセージ・ご質問への回答は難しい場合もございます。</p>
   </div>
 </section>
 <section class="how-section" id="how">
@@ -645,7 +677,7 @@
         <div class="cta-card-icon">🎓</div>
         <h3 data-ja="テスト運営に参加する" data-en="Join the Test Program">テスト運営に参加する</h3>
         <p data-ja="応募フォームから簡単にお申し込みいただけます。皆さまのご参加をお待ちしています。" data-en="Apply easily via the form. We look forward to your participation.">応募フォームから簡単にお申し込みいただけます。皆さまのご参加をお待ちしています。</p>
-        <a href="terms.html" class="cta-card-btn" data-ja="参加する →" data-en="Join →">参加する →</a>
+        <a href="https://forms.gle/FQmsZTbkryYs4L6m6" target="_blank" class="cta-card-btn" data-ja="参加する →" data-en="Join →">参加する →</a>
       </div>
     </div>
     <p class="cta-contact reveal">
@@ -660,9 +692,8 @@
   <div class="foot-logo"><span class="uni">Uni</span><span class="cation">cation</span></div>
   <p data-ja="「学びたい。」を我慢しない。" data-en="Don't hold back your desire to learn.">「学びたい。」を我慢しない。</p>
   <p style="margin-top:14px;" data-ja="© 2025 Unication. All rights reserved." data-en="© 2025 Unication. All rights reserved.">© 2025 Unication. All rights reserved.</p>
-  <p style="margin-top:12px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+  <p style="margin-top:12px;">
     <a href="terms.html" style="color:rgba(255,255,255,0.55);font-size:0.82rem;text-decoration:underline;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.color='rgba(255,255,255,0.55)'" data-ja="利用規約・プライバシーポリシー" data-en="Terms & Privacy Policy">利用規約・プライバシーポリシー</a>
-    <a href="https://drive.google.com/file/d/1x5r35Sqj6LYiTih1Vpq-fCvCmmFeDw9V/view?usp=sharing" target="_blank" style="color:rgba(255,255,255,0.55);font-size:0.82rem;text-decoration:underline;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.color='rgba(255,255,255,0.55)'" data-ja="特定商取引法に基づく表記" data-en="Tokusho-ho Disclosure">特定商取引法に基づく表記</a>
   </p>
 </footer>
 
